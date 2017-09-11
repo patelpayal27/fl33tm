@@ -1,0 +1,670 @@
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+    <div class="mdl-tabs__tab-bar">
+        <a href="#cities-panel" class="mdl-tabs__tab is-active">Cities</a>
+        <a href="#consign-panel" class="mdl-tabs__tab">Consign</a>
+        <a href="#drivers-panel" class="mdl-tabs__tab">Drivers</a>
+        <a href="#vehicle-panel" class="mdl-tabs__tab">Vehicle</a>
+        <a href="#others-panel" class="mdl-tabs__tab">Others</a>
+    </div>
+
+    <div id="cities-panel" class="mdl-tabs__panel tab-panel is-active" style="padding: 10px 10px 10px 10px">
+        <div class="mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--10-col">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="txtSearchCity">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" id="txtSearchCity">
+                        <label class="mdl-textfield__label" for="txtSearchCity">Search City</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                <button id="btnAddCityMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons">add</i>
+                </button>
+            </div> 
+        </div>
+        <div id="city-List" class="mdl-shadow--2dp data-list">
+            <div class="mdl-grid data-list-item">
+                <div class="mdl-cell mdl-cell--11-col">
+                    <span style="font-size:16px" role="link">Mumbai</span>
+                </div>
+                <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">mode_edit</i>
+                    </button>
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    onclick="$(this).closest('.data-list-item').remove();">
+                        <i class="material-icons">delete_forever</i>
+                    </button>
+                </div>
+            </div>
+            <div class="mdl-grid data-list-item">
+                <div class="mdl-cell mdl-cell--11-col">
+                    <span style="font-size:16px" role="link">Mumbai</span>
+                </div>
+                <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">mode_edit</i>
+                    </button>
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    onclick="$(this).closest('.data-list-item').remove();">
+                        <i class="material-icons">delete_forever</i>
+                    </button>
+                </div>            
+            </div>
+        </div>
+    </div> 
+    <div id="consign-panel" class="mdl-tabs__panel tab-panel" style="padding: 10px 10px 10px 10px">
+        <div class="mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--10-col">
+                <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="txtSearchConsign">
+                <label class="mdl-textfield__label" for="txtSearchConsign">Search Consign</label>
+                </div> -->
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="txtSearchConsign">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" id="txtSearchConsign">
+                        <label class="mdl-textfield__label" for="txtSearchConsign">Search Consign</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                <button id="btnAddConsignMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons">add</i>
+                </button>
+            </div> 
+        </div>
+        <div id="consign-List" class="mdl-shadow--2dp data-list">
+            <div class="mdl-grid data-list-item">
+                <div class="mdl-cell mdl-cell--11-col">
+                    <div><span style="font-size:18px">Aditya Toshniwal</span></div>
+                    <div><span style="font-size:12px">B-15, Girdhar, Borivali - 400001</span></div>
+                </div>
+                <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">mode_edit</i>
+                    </button>
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    onclick="$(this).closest('.data-list-item').remove();">
+                        <i class="material-icons">delete_forever</i>
+                    </button>
+                </div>
+            </div>
+            <div class="mdl-grid data-list-item">
+                <div class="mdl-cell mdl-cell--11-col">
+                    <div><span style="font-size:18px">Aditya Toshniwal</span></div>
+                    <div><span style="font-size:12px">B-15, Girdhar, Borivali - 400001</span></div>
+                </div>
+                <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">mode_edit</i>
+                    </button>
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    onclick="$(this).closest('.data-list-item').remove();">
+                        <i class="material-icons">delete_forever</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- <li class="mdl-list__item data-list-item h-divider"> -->
+    </div>
+    <div id="drivers-panel" class="mdl-tabs__panel tab-panel" style="padding: 10px 10px 10px 10px">
+        <div class="mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--10-col">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="txtSearchDriver">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" id="txtSearchDriver">
+                        <label class="mdl-textfield__label" for="txtSearchDriver">Search Driver</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                <button id="btnAddDriverMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons">add</i>
+                </button>
+            </div> 
+        </div>
+        <div id="driver-List" class="mdl-shadow--2dp data-list">
+            <div class="mdl-grid data-list-item">
+                <div class="mdl-cell mdl-cell--11-col">
+                    <span>Aditya Toshniwal</span>
+                </div>
+                <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">mode_edit</i>
+                    </button>
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    onclick="$(this).closest('.data-list-item').remove();">
+                        <i class="material-icons">delete_forever</i>
+                    </button>
+                </div>
+            </div>
+            <div class="mdl-grid data-list-item">
+                <div class="mdl-cell mdl-cell--11-col">
+                    <span>Parshwa Shah</span>
+                </div>
+                <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">mode_edit</i>
+                    </button>
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    onclick="$(this).closest('.data-list-item').remove();">
+                        <i class="material-icons">delete_forever</i>
+                    </button>
+                </div>            
+            </div>
+        </div>
+    </div>
+    <div id="vehicle-panel" class="mdl-tabs__panel tab-panel" style="padding: 10px 10px 10px 10px">
+        <div class="mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--10-col">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="txtSearchVehicle">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" id="txtSearchVehicle">
+                        <label class="mdl-textfield__label" for="txtSearchVehicle">Search Vehicle</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                <button id="btnAddVehicleMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons">add</i>
+                </button>
+            </div> 
+        </div>
+        <div id="vehicle-List" class="mdl-shadow--2dp data-list">
+            <div class="mdl-grid data-list-item">
+                <div class="mdl-cell mdl-cell--11-col">
+                    <div><span style="font-size:18px">Vehicle 1</span></div>
+                    <div><span style="font-size:12px">XXX XXXX 2519</span></div>
+                </div>
+                <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">mode_edit</i>
+                    </button>
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    onclick="$(this).closest('.data-list-item').remove();">
+                        <i class="material-icons">delete_forever</i>
+                    </button>
+                </div>
+            </div>
+            <div class="mdl-grid data-list-item">
+                <div class="mdl-cell mdl-cell--11-col">
+                    <div><span style="font-size:18px">Vehicle 2</span></div>
+                    <div><span style="font-size:12px">XXX XXXX 2519</span></div>
+                </div>
+                <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">mode_edit</i>
+                    </button>
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    onclick="$(this).closest('.data-list-item').remove();">
+                        <i class="material-icons">delete_forever</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="others-panel" class="mdl-tabs__panel tab-panel">
+        <div class="mdl-grid">
+            <div id="tileArea1" class="mdl-cell mdl-cell--6-col">
+                <div id="tilePaymentType" class="mdl-shadow--2dp tile-div" >
+                        <div id="divPaymentTypeHeader" class="mdl-grid mdl-grid--no-spacing tile-header">
+                            <div class="mdl-cell mdl-cell--10-col">
+                                Payment Type
+                            </div>
+                            <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                <button id="btnAddPaymentTypeMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                                <i class="material-icons">add</i>
+                                </button>
+                            </div> 
+                        </div>
+                        <!-- style="height:auto;max-height:400px;min-height:100px" -->
+                        <div id="divPaymentTypeData" class="data-list" style="height:auto">
+                            <div class="mdl-grid data-list-item">
+                                <div class="mdl-cell mdl-cell--8-col">
+                                    <span>Payment Type Name</span>
+                                </div>
+                                <div class="mdl-cell mdl-cell--1-col">
+                                    <span>1</span>
+                                </div>                                
+                                <div class="mdl-cell mdl-cell--1-col">
+                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="payid1">
+                                        <input type="checkbox" id="payid1" class="mdl-switch__input" checked>
+                                        <span class="mdl-switch__label"></span>
+                                    </label>
+                                </div>                             
+                                <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                        <i class="material-icons">mode_edit</i>
+                                    </button>
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                    onclick="$(this).closest('.data-list-item').remove();">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mdl-grid data-list-item">
+                                <div class="mdl-cell mdl-cell--8-col">
+                                    <span>Payment Type Name</span>
+                                </div>
+                                <div class="mdl-cell mdl-cell--1-col">
+                                    <span>2</span>
+                                </div>
+                                <div class="mdl-cell mdl-cell--1-col">
+                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="payid2">
+                                        <input type="checkbox" id="payid2" class="mdl-switch__input" checked>
+                                        <span class="mdl-switch__label"></span>
+                                    </label>
+                                </div>                                 
+                                <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                        <i class="material-icons">mode_edit</i>
+                                    </button>
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                    onclick="$(this).closest('.data-list-item').remove();">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mdl-grid data-list-item">
+                                <div class="mdl-cell mdl-cell--8-col">
+                                    <span>Payment Type Name</span>
+                                </div>
+                                <div class="mdl-cell mdl-cell--1-col">
+                                    <span>3</span>
+                                </div>
+                                <div class="mdl-cell mdl-cell--1-col">
+                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="payid3">
+                                        <input type="checkbox" id="payid3" class="mdl-switch__input" checked>
+                                        <span class="mdl-switch__label"></span>
+                                    </label>
+                                </div>                                                                 
+                                <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                        <i class="material-icons">mode_edit</i>
+                                    </button>
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                    onclick="$(this).closest('.data-list-item').remove();">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                </div>
+                <div id="tileGRType" class="mdl-shadow--2dp tile-div">
+                        <div id="divGRTypeHeader" class="mdl-grid mdl-grid--no-spacing tile-header">
+                            <div class="mdl-cell mdl-cell--10-col">
+                                GR Type
+                            </div>
+                            <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                <button id="btnAddGRTypeMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                                <i class="material-icons">add</i>
+                                </button>
+                            </div> 
+                        </div>
+                        <!-- style="height:auto;max-height:150px;min-height:100px" -->
+                        <div id="divGRTypeData" class="data-list" style="height:auto">
+                            <div class="mdl-grid data-list-item">
+                                <div class="mdl-cell mdl-cell--10-col">
+                                    <div><span style="font-size:16px">GR Type 1</span></div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                    onclick="$(this).closest('.data-list-item').remove();">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mdl-grid data-list-item">
+                                <div class="mdl-cell mdl-cell--10-col">
+                                    <div><span style="font-size:16px">GR Type 2</span></div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                    onclick="$(this).closest('.data-list-item').remove();">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mdl-grid data-list-item">
+                                <div class="mdl-cell mdl-cell--10-col">
+                                    <div><span style="font-size:16px">GR Type 2</span></div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                    onclick="$(this).closest('.data-list-item').remove();">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+            <div id="tileArea2" class="mdl-cell mdl-cell--6-col">
+                <div id="tilePriority" class="mdl-shadow--2dp tile-div">
+                    <!-- <div class="mdl-cell mdl-cell--12-col"> -->
+                        <div id="divPriorityHeader" class="mdl-grid mdl-grid--no-spacing tile-header">
+                            <div class="mdl-cell mdl-cell--10-col">
+                                Priority
+                            </div>
+                            <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                <button id="btnAddPriorityMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                                <i class="material-icons">add</i>
+                                </button>
+                            </div> 
+                        </div>
+                        <!-- style="height:auto;max-height:200px;min-height:100px" -->
+                        <div id="divPriorityData" class="data-list" style="height:auto">
+                            <div class="mdl-grid data-list-item">
+                                <div class="mdl-cell mdl-cell--10-col">
+                                    <div><span style="font-size:16px">Priority Desc 1</span></div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                    onclick="$(this).closest('.data-list-item').remove();">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mdl-grid data-list-item">
+                                <div class="mdl-cell mdl-cell--10-col">
+                                    <div><span style="font-size:16px">Priority Desc 2</span></div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                    onclick="$(this).closest('.data-list-item').remove();">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mdl-grid data-list-item">
+                                <div class="mdl-cell mdl-cell--10-col">
+                                    <div><span style="font-size:16px">Priority Desc 3</span></div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                    onclick="$(this).closest('.data-list-item').remove();">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                </div>
+                <div id="tileTruckLoadType" class="mdl-shadow--2dp tile-div">
+                    <!-- <div class="mdl-cell mdl-cell--12-col"> -->
+                        <div id="divTruckLoadTypeHeader" class="mdl-grid mdl-grid--no-spacing tile-header">
+                            <div class="mdl-cell mdl-cell--10-col">
+                                Truck Load Type
+                            </div>
+                            <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                <button id="btnAddTLTypeMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                                <i class="material-icons">add</i>
+                                </button>
+                            </div> 
+                        </div>
+                        <!-- style="height:auto;max-height:150px;min-height:100px" -->
+                        <div id="divTruckLoadTypeData" class="data-list" style="height:auto">
+                            <div class="mdl-grid data-list-item">
+                                <div class="mdl-cell mdl-cell--10-col">
+                                    <div><span style="font-size:16px">Truck Load Type 1</span></div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                    onclick="$(this).closest('.data-list-item').remove();">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mdl-grid data-list-item">
+                                <div class="mdl-cell mdl-cell--10-col">
+                                    <div><span style="font-size:16px">Truck Load Type 2</span></div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                    onclick="$(this).closest('.data-list-item').remove();">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mdl-grid data-list-item">
+                                <div class="mdl-cell mdl-cell--10-col">
+                                    <div><span style="font-size:16px">Truck Load Type 3</span></div>
+                                </div>
+                                <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+                                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                                    onclick="$(this).closest('.data-list-item').remove();">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<dialog id="dialogCity" class="mdl-dialog" style="width:30%">
+    <div class="mdl-grid mdl-grid--no-spacing dialog-header">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
+            Manage City
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#dialogCity')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+    <input id="cityId" type="text" hidden="true"/>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <input class="mdl-textfield__input" type="text" id="txtCityName"  pattern="[A-Za-z ]*"/>
+        <label class="mdl-textfield__label" for="txtCityName">City</label>
+        <span id="cityNameErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+    </div>
+    <div class="dialog-footer">
+        <button id="btnAddCity" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
+        onclick="addCityToList()">Save</button>
+    </div>
+</dialog>
+<dialog id="dialogConsign" class="mdl-dialog" style="width:30%">
+    <div class="mdl-grid mdl-grid--no-spacing dialog-header">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
+            Manage Consign Details
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#dialogConsign')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+    <input id="conId" type="text" hidden="true"/>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <input class="mdl-textfield__input" type="text" id="txtConName"  pattern="[A-Za-z ]*"/>
+        <label class="mdl-textfield__label" for="txtConName">Name</label>
+        <span id="conNameErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <textarea class="mdl-textfield__input" id="txtConAddr" rows="1" pattern="[A-Za-z0-9\.]*"></textarea>
+        <label class="mdl-textfield__label" for="txtConAddr">Address</label>
+        <span id="conAddrErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets,Numbers and Dots allowed.</span>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <input class="mdl-textfield__input" type="text" id="txtConPin" maxlength="6"  pattern="[0-9]*"/>
+        <label class="mdl-textfield__label" for="txtConPin">Pin Code</label>
+        <span id="conPinErr" class="mdl-textfield__error">Invalid Entry. Only Numbers Allowed with length 6.</span>
+    </div>
+    <div class="dialog-footer">
+        <button id="btnAddCon" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+        onclick="addConsignToList()">Save</button>
+        <!-- <button id="btnEditCon" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Edit</button> -->
+    </div>
+</dialog>
+<dialog id="dialogDriver" class="mdl-dialog" style="width:30%">
+    <div class="mdl-grid mdl-grid--no-spacing dialog-header">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
+            Manage Driver Details
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#dialogDriver')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+    <input id="driverId" type="text" hidden="true"/>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <input class="mdl-textfield__input" type="text" id="txtDriverName"  pattern="[A-Za-z ]*"/>
+        <label class="mdl-textfield__label" for="txtDriverName">Driver Name</label>
+        <span id="driverNameErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+    </div>
+    <div class="dialog-footer">
+        <button id="btnAddDriver" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+        onclick="addDriverToList()">Save</button>
+    </div>
+</dialog>
+<dialog id="dialogVehicle" class="mdl-dialog" style="width:30%">
+    <div class="mdl-grid mdl-grid--no-spacing dialog-header">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
+            Manage Vehicle Details
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#dialogVehicle')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+    <input id="vehicleId" type="text" hidden="true"/>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <input class="mdl-textfield__input" type="text" id="txtVehicleName"  pattern="[A-Za-z ]*"/>
+        <label class="mdl-textfield__label" for="txtVehicleName">Vehicle</label>
+        <span id="vehicleNameErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <input class="mdl-textfield__input" type="text" id="txtVehicleNo"  pattern="[A-Za-z0-9]*"/>
+        <label class="mdl-textfield__label" for="txtVehicleNo">Vehicle No.</label>
+        <span id="vehicleNoErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets, Numbers and Spaces allowed.</span>
+    </div>
+    <div class="dialog-footer">
+            <button id="btnAddVehicle" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+            onclick="addVehicleToList()">Save</button>
+    </div>
+</dialog>
+<dialog id="dialogPaymentType" class="mdl-dialog" style="width:30%">
+    <div class="mdl-grid mdl-grid--no-spacing dialog-header">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
+            Add Payment Type
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#dialogPaymentType')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+    <input id="paymentTypeId" type="text" hidden="true"/>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <input class="mdl-textfield__input" type="text" id="txtPaymentTypeName"  pattern="[A-Za-z ]*"/>
+        <label class="mdl-textfield__label" for="txtPaymentTypeName">Payment Type Name</label>
+        <span id="paymentTypeNameErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <input class="mdl-textfield__input" type="text" id="txtPaymentTypeSeq"  pattern="[1-9]*"/>
+        <label class="mdl-textfield__label" for="txtPaymentTypeSeq">Payment Type Sequence Position</label>
+        <span id="paymentTypeSeqErr" class="mdl-textfield__error">Invalid Entry. Only Numbers allowed.</span>
+    </div>
+    <div class="dialog-footer">
+        <button id="btnAddPaymentType" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+        onclick="addPaymentTypeToList()">Save</button>
+    </div>
+</dialog>
+<dialog id="dialogPriority" class="mdl-dialog" style="width:30%">
+    <div class="mdl-grid mdl-grid--no-spacing dialog-header">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
+            Add Priority
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#dialogPriority')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>    
+    <input id="priorityId" type="text" hidden="true"/>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <input class="mdl-textfield__input" type="text" id="txtPriority" pattern="[A-Za-z ]*"/>
+        <label class="mdl-textfield__label" for="txtPriority">Priority</label>
+        <span id="priorityNameErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+    </div>
+    <div class="dialog-footer">
+            <button id="btnAddPriority" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+            onclick="addPriorityToList()">Save</button>
+    </div>
+</dialog>
+<dialog id="dialogGRType" class="mdl-dialog" style="width:30%">
+    <div class="mdl-grid mdl-grid--no-spacing dialog-header">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
+            Add GR Type
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#dialogGRType')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+    <input id="grTypeId" type="text" hidden="true"/>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <input class="mdl-textfield__input" type="text" id="txtGRType"  pattern="[A-Za-z ]*"/>
+        <label class="mdl-textfield__label" for="txtGRType">GR Type</label>
+        <span id="grTypeErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+    </div>
+    <div class="dialog-footer">
+            <button id="btnAddGRType" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+            onclick="addGRTypeToList()">Save</button>
+    </div>
+</dialog>
+<dialog id="dialogTruckLoadType" class="mdl-dialog" style="width:30%">
+    <div class="mdl-grid mdl-grid--no-spacing dialog-header">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
+            Add Truck Load Type
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#dialogTruckLoadType')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+    <input id="tlTypeId" type="text" hidden="true"/>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <input class="mdl-textfield__input" type="text" id="txtTLType"  pattern="[A-Za-z ]*"/>
+        <label class="mdl-textfield__label" for="txtTLType">Truck Load Type</label>
+        <span id="tlTypeErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+    </div>
+    <div class="dialog-footer">
+            <button id="btnAddTLType" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+            onclick="addTLTypeToList()">Save</button>
+    </div>
+</dialog>
+<script>
+    bindMasterEvents();
+</script>

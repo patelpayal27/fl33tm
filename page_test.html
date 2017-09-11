@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>MDL</title>
+
+  <link href="./css/material-indigo-blue.min.css" rel="stylesheet">
+  <link href="./css/fleet-ui.css" rel="stylesheet">
+  <link href="./css/flatpickr.min.css" rel="stylesheet">
+  <!--<link href="./css/localicons.css" rel="stylesheet">-->
+    <style>
+    </style>
+</head>
+<style>
+/*div {
+    border: solid;
+    border-width: 1px;  
+}*/
+</style>
+<body id="body-tag" >
+<div class="container">
+    <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell mdl-cell--4-col" >
+            <div class="pad-5lr">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <select tabindex="5" class="mdl-textfield__input" id="selRepName">
+                        <option></option>
+                        <option value="1">Report 1</option>
+                        <option value="2">Report 2</option>
+                        <option value="3">Report 3</option>
+                    </select>
+                    <label class="mdl-textfield__label" for="selFromCity">Report Name</label>
+                </div>
+            </div>
+            <div class="mdl-grid mdl-grid--no-spacing">
+                <div class="mdl-cell mdl-cell--6-col pad-5lr" >
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input tabindex="2" class="flatpickr mdl-textfield__input " type="text" id="txtFromDate"/>
+                        <label class="mdl-textfield__label" for="txtFromDate">From Date</label>
+                    </div>
+                </div>
+
+                <div class="mdl-cell mdl-cell--6-col  pad-5lr" >
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input tabindex="3" class="flatpickr mdl-textfield__input" type="text" id="txtToDate"/>
+                        <label class="mdl-textfield__label" for="txtToDate">To Date</label>
+                    </div>
+                </div>
+            </div>
+            <div class="pad-5lr">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
+                id="generateReport" onclick="">Generate Report</button>    
+            </div>
+            <div class="pad-5lr">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
+                id="savePDF" onclick="">savePDF</button>    
+            </div>            
+        </div>
+        <div class="mdl-cell mdl-cell--8-col pad-5lr" >
+            <iframe id="repFrame" src="" style="height:100vh;width:100%">
+            </iframe>
+        </div>
+    </div>
+<div>
+<script src="./js/material.min.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/sha256.jquery.js"></script>
+<script src="./js/flatpickr.min.js"></script>
+<script src="./js/print.min.js"></script>
+<script src="./js/fleetui.js"></script>
+<script>
+    $("#generateReport").click(function () { 
+        $("#repFrame").attr("src", "reports/testreport.html");
+    });
+
+    $("#savePDF").click(function () { 
+        ipcRenderer.send("printPDF");
+    });
+</script>    
+</body>

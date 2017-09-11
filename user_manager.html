@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MDL</title>
+    <link href="./css/material-indigo-blue.min.css" rel="stylesheet">
+    <link href="./css/flatpickr.min.css" rel="stylesheet">
+    <link href="./css/fleet-ui.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/icon.css">
+</head>
+<body id="body-tag">
+<div class="container" style="padding: 10px 10px 10px 10px">
+    <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell mdl-cell--10-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="txtSearchUser">
+                    <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" id="txtSearchUser">
+                    <label class="mdl-textfield__label" for="txtSearchUser">Search User</label>
+                </div>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
+            <button id="btnCreateCoupon" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+            <i class="material-icons">add</i>
+            </button>
+        </div>
+    </div>
+    <div class="mdl-grid mdl-grid--no-spacing">
+        <div id="user-List" class="mdl-cell mdl-cell--12-col mdl-shadow--2dp data-list">
+            <div class="mdl-grid data-list-item">
+                <div class="mdl-cell mdl-cell--10-col">
+                    <div><span style="font-size:18px">Aditya Toshniwal</span></div>
+                    <div>
+                        <span style="font-size:12px">Login Id</span>&nbsp;&nbsp;:&nbsp;
+                        <span style="font-size:12px">aditya123</span>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--1-col">
+                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="stataditya123">
+                        <input type="checkbox" id="stataditya123" class="mdl-switch__input" checked>
+                        <span class="mdl-switch__label"></span>
+                    </label>
+                </div>                
+                <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">mode_edit</i>
+                    </button>
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    onclick="$(this).closest('.data-list-item').remove();">
+                        <i class="material-icons">delete_forever</i>
+                    </button>
+                </div>
+            </div>
+            <div class="mdl-grid data-list-item">
+                <div class="mdl-cell mdl-cell--10-col">
+                    <div><span style="font-size:18px">Parshwa Shah</span></div>
+                    <div>
+                        <span style="font-size:12px">Login Id</span>&nbsp;&nbsp;:&nbsp;
+                        <span style="font-size:12px">parshwa123</span>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--1-col">
+                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="statparshwa123">
+                        <input type="checkbox" id="statparshwa123" class="mdl-switch__input" checked>
+                        <span class="mdl-switch__label"></span>
+                    </label>
+                </div>                 
+                <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">mode_edit</i>
+                    </button>
+                    <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                    onclick="$(this).closest('.data-list-item').remove();">
+                        <i class="material-icons">delete_forever</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<dialog id="dialogCoupon" class="mdl-dialog" style="width:30%">
+    <div class="mdl-grid mdl-grid--no-spacing dialog-header">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
+            New User Coupon
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#dialogCoupon')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+    <div>Autogenerated coupon code here. Please give the below coupon to user for creating new login user.</div>
+    <div class="pad-20-2-20-2" style="font-size:22px;text-align:center;">COUXXPON123XX</div>
+    <div class="dialog-footer">
+        <button id="btnSaveCoupon" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+        onclick="">Save Coupon</button>
+    </div>    
+</dialog>
+
+    <script src="./js/material.min.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/fleetui.js"></script>
+</body>
+</html>

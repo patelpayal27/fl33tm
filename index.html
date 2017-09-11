@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>FleetM</title>
+
+  <link href="./css/material-indigo-blue.min.css" rel="stylesheet">
+  <link href="./css/flatpickr.min.css" rel="stylesheet">
+  <link href="./css/print.min.css" rel="stylesheet">
+  <link href="./css/fleet-ui.css" rel="stylesheet">
+  
+  <!--<link href="./css/localicons.css" rel="stylesheet">-->
+    <style>
+
+
+ 
+    </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body id="body-tag" style="">
+    <div id="container">
+    </div>
+    <script src="./js/material.min.js"></script>
+    <script src="./js/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+    <script src="./js/sha256.jquery.js"></script>
+    <script src="./js/flatpickr.min.js"></script>
+    <script src="./js/print.min.js"></script>
+    <script src="./js/fleetui.js"></script>
+    <script src="./js/d3.min.js"></script>
+    <script>
+        if (window.addEventListener)
+            window.addEventListener("load", loadLogin, false);
+            //window.addEventListener("load", loadDashboard, false);
+        else if (window.attachEvent)
+            //window.attachEvent("onload", loadLogin);
+            window.attachEvent("onload", loadDashboard);
+        //else window.onload = loadLogin;
+        else window.onload = loadDashboard;
+    </script>
+</body>

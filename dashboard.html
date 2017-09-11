@@ -1,0 +1,113 @@
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header has-drawer ">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <div>
+                <span id="user-page-header" class="mdl-layout__title">Dashboard</span>
+                </div>
+                <!-- Add spacer, to align navigation to the right -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation -->
+                <div class="loggedin">
+                    <span style="font-size:20px">Hello,&nbsp;
+                    <span >Aditya Toshniwal</span>
+                    </span>
+                </div>
+                <button id="btnInfo" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons" style="font-size:28px">bubble_chart</i>
+                </button>
+                <div class="mdl-tooltip" data-mdl-for="btnInfo">Session and Other Info</div>
+                &nbsp;&nbsp;&nbsp;
+                <button id="btnLogout" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                    <i class="material-icons" style="font-size:28px">exit_to_app</i>
+                </button>
+                <div class="mdl-tooltip" data-mdl-for="btnLogout">Logout</div>
+                &nbsp;&nbsp;&nbsp;
+                <button id="btnExit" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="exitApp()">
+                    <i class="material-icons" style="font-size:28px;">power_settings_new</i>
+                </button>
+                <div class="mdl-tooltip" data-mdl-for="btnExit">Exit and Close</div>          
+            </div>
+            <!-- MDL Progress Bar with Indeterminate Progress -->
+            
+        </header>
+        <div class="mdl-layout__drawer sidebar-list" aria-hidden="true" style="overflow:hidden!important">
+            <div style="height:50px;padding: 20px 5px 20px 5px;">
+                <img src="images/fleetm.svg" width="100%" /> 
+                <span style="font-size: 20px;">Version 1.0.0</span>
+            </div>
+            <div class="side-list-item" role="link"
+                            id="menu-dashboard"
+                            data-pageheader="Dashboard"
+                            onclick="loadDashboard()">
+                <div class="mdl-grid mdl-grid--no-spacing">
+                    <div class="mdl-cell mdl-cell--10-col">
+                        <span class="side-list-name">Dashboard</span>
+                    </div>  
+                    <div class="mdl-cell  mdl-cell--2-col ">
+                        <i class="material-icons side-list-icon">dashboard</i>
+                    </div>                       
+                </div>
+            </div>   
+            <div class="side-list-item" role="link"
+                            id="menu-grbook"
+                            data-pageurl="./grbooksearch.html"
+                            data-pageheader="G. R. Book"
+                            onclick="loadUserPageContent(this)">
+                <div class="mdl-grid mdl-grid--no-spacing">
+                    <div class="mdl-cell mdl-cell--10-col">
+                        <span class="side-list-name">G.R. Book</span>
+                    </div> 
+                    <div class="mdl-cell  mdl-cell--2-col ">
+                        <i class="material-icons side-list-icon">assignment</i>
+                    </div>                    
+                       
+                </div>
+            </div> 
+            <div class="side-list-item" role="link"
+                            id="menu-master-data"
+                            data-pageurl="./master_data.html"
+                            data-pageheader="Master Data"
+                            onclick="loadUserPageContent(this)">
+                <div class="mdl-grid mdl-grid--no-spacing">
+                    <div class="mdl-cell mdl-cell--10-col">
+                        <span class="side-list-name">Master Data</span>
+                    </div> 
+                    <div class="mdl-cell  mdl-cell--2-col ">
+                        <i class="material-icons side-list-icon">language</i>
+                    </div>             
+                </div>
+            </div> 
+            <div class="side-list-item" role="link"
+                            id="menu-master-data"
+                            data-pageurl="./report_setup.html"
+                            data-pageheader="Reports"
+                            onclick="loadUserPageContent(this)">
+                <div class="mdl-grid mdl-grid--no-spacing">
+                    <div class="mdl-cell mdl-cell--10-col">
+                        <span class="side-list-name">Reports</span>
+                    </div> 
+                    <div class="mdl-cell  mdl-cell--2-col ">
+                        <i class="material-icons side-list-icon">receipt</i>
+                    </div>             
+                </div>
+            </div>            
+            <div class="side-list-item" role="link"
+                            id="menu-master-data"
+                            data-pageurl="./user_manager.html"
+                            data-pageheader="User Manager"
+                            onclick="loadUserPageContent(this)">
+                <div class="mdl-grid mdl-grid--no-spacing">
+                    <div class="mdl-cell mdl-cell--10-col">
+                        <span class="side-list-name">User Manager</span>
+                    </div> 
+                    <div class="mdl-cell  mdl-cell--2-col ">
+                        <i class="material-icons side-list-icon">face</i>
+                    </div>             
+                </div>
+            </div> 
+        </div>
+        <div id="user-page-content" class="mdl-layout__content main-content">
+        </div>            
+        </div>
+    </div>

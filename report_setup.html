@@ -1,0 +1,89 @@
+<div class="mdl-grid mdl-grid--no-spacing full-width-textbox">
+    <div class="mdl-cell mdl-cell--4-col pad-5lr" >
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <select tabindex="5" class="mdl-textfield__input" id="selRepName">
+                <option></option>
+                <option value="1">Report 1</option>
+                <option value="2">Report 2</option>
+                <option value="3">Report 3</option>
+            </select>
+            <label class="mdl-textfield__label" for="selRepName">Report Name</label>
+        </div>
+        <div class="mdl-grid mdl-grid--no-spacing full-width-textbox">
+            <div class="mdl-cell mdl-cell--6-col" >
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input tabindex="2" class="flatpickr mdl-textfield__input " type="text" id="txtFromDate"/>
+                    <label class="mdl-textfield__label" for="txtFromDate">From Date</label>
+                </div>
+            </div>
+
+            <div class="mdl-cell mdl-cell--6-col" >
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input tabindex="3" class="flatpickr mdl-textfield__input" type="text" id="txtToDate"/>
+                    <label class="mdl-textfield__label" for="txtToDate">To Date</label>
+                </div>
+            </div>
+        </div>
+        <div class="mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-cell mdl-cell--6-col" >        
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
+                id="generateReport">Generate  </button>    
+            </div>
+            <div class="mdl-cell mdl-cell--6-col" style="text-align:right">        
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
+                id="savePDF">Save-PDF</button>    
+            </div>
+        </div>           
+    </div>
+    <div class="mdl-cell mdl-cell--8-col pad-5lr" >
+        <webview id="repFrame" src="" style="height:80vh;width:100%">
+        </webview>
+    </div>
+</div>
+<script>
+    $("#repFrame").on("did-start-loading",  
+        function() {
+            console.log('1');
+            $('#generateReport').prop('disabled', true);
+            $("#generateReport").html("Generating...");
+        }
+    );
+    $("#repFrame").on("did-stop-loading",  
+        function() {
+            console.log('2');      
+            $('#generateReport').prop('disabled', false);                  
+            $("#generateReport").html("Generate");
+        }
+    );
+    
+    $("#generateReport").click(function () {
+        setTimeout( function() {
+            $("#repFrame").attr( 'src', 'reports/testreport.html');
+        }, 200 );       
+        //$("#repFrame").src='reports/testreport.html'; 
+    });
+
+    $("#savePDF").click(function () {
+        dialog.showSaveDialog(
+            {
+                defaultPath:'~/printfile.pdf',
+                filters: [
+                    { name: 'PDF', extensions: ['pdf'] }
+                ]
+            }, function (fileName) {
+                if (fileName === undefined) return;
+                $("#repFrame")[0].printToPDF(
+                    {printBackground: true}, 
+                    function (error, data) {
+                        if (error) throw error
+                        fs.writeFile(fileName, data, function (error) {
+                            if (error) { throw error }
+                            shell.openItem(fileName)
+                        })
+                });                    
+
+            }
+        );
+
+    });
+</script>  

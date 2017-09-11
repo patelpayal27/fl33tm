@@ -1,0 +1,19 @@
+HEX
+ #2980B9  
+RGB
+ 41, 128, 185  
+HSL
+ 204, 64%, 44%
+
+
+=================
+
+HEX
+ #0277BD  
+RGB
+ 2, 119, 189  
+HSL
+ 202, 99%, 37%
+
+mdl-color--light-blue-800
+mdl-color-text--light-blue-800

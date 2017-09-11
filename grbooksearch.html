@@ -1,0 +1,50 @@
+<div id="SearchCriteriaPanel">
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input tabindex="1" class="mdl-textfield__input" type="text" id="txtGRNo"/>
+            <label class="mdl-textfield__label" for="txtGRNo">G.R. No.</label>
+        </div>
+
+        <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input tabindex="2" class="flatpickr mdl-textfield__input " type="text" id="txtFromDate"/>
+            <label class="mdl-textfield__label" for="txtFromDate">From Date</label>
+        </div>
+
+        <div class="mdl-cell mdl-cell--2-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input tabindex="3" class="flatpickr mdl-textfield__input" type="text" id="txtToDate"/>
+            <label class="mdl-textfield__label" for="txtToDate">To Date</label>
+        </div>
+
+        <div class="mdl-cell mdl-cell--5-col"></div>
+
+        <div class="mdl-cell mdl-cell--1-col" align="Right">
+            <br/>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
+            id="btnSearch" onclick="showSearchResult()">Search</button>
+        </div>
+    </div>
+</div>
+
+<div id="SearchResultPanel" class="mdl-cell mdl-cell--12-col mdl-shadow--2dp" style="max-height: 350px;overflow-y:scroll; overflow-x:hidden">
+</div>
+
+<dialog id="divGrDialog" class="mdl-dialog" style="width:95%;">
+    <div class="mdl-grid mdl-grid--no-spacing modal-header dialog-header">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
+            G. R. Book Entry
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="scrollToBottom()" tabindex="-1">
+                <i class="material-icons">vertical_align_bottom</i>
+            </button>
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#divGrDialog')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>    
+    <div id="divDialogContent">
+        <div style="height:100vh">DummyDiv</div>
+    </div>
+</dialog>

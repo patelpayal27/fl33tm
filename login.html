@@ -1,0 +1,184 @@
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--11-col"></div>
+    <div class="mdl-cell mdl-cell--1-col" style="text-align:right"> 
+        <button id="btnExit" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+        onclick="exitApp()">
+            <i class="material-icons" style="font-size:28px;">power_settings_new</i>
+        </button>
+    </div>
+</div>
+<div style="height:100px"></div>
+<div class="mdl-grid">
+    <div class="mdl-cell--4-col"></div>
+    <div class="mdl-cell--4-col mdl-shadow--2dp">
+        <div style="height:350px; padding: 25px 25px 25px 25px;">
+        <div><img src="./images/fleetm.svg" width="200" /></div>
+        <div>
+            <span><h5>Sign in</h5></span>
+            <div id="userIdDiv" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                style="width:100%">
+                <input class="mdl-textfield__input" type="text" id="userId"  pattern="[A-Za-z0-9\.]*"/>
+                <label class="mdl-textfield__label" for="userId">Username</label>
+                <span id="userIdErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets,Numbers and Dots allowed.</span>
+            </div>
+            <div id="userPassDiv" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+                style="width:100%">
+                <input class="mdl-textfield__input" type="password" id="userPass" pattern="[A-Za-z0-9\.]*"/>
+                <label class="mdl-textfield__label" for="userPass">Password</label>
+                <span id="userPassErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets,Numbers and Dots allowed.</span>
+            </div>
+            <div class="mdl-grid mdl-grid--no-spacing pad-20-2-20-2" style="width:100%">
+                <div class="mdl-cell--8-col">
+                    <a href="#">Forgot Password?</a>&emsp;
+                    <!-- &nbsp; 1 normal space -->
+                    <!-- &ensp; 2 normal space-->
+                    <!-- &emsp; 4 normal space-->
+                    <a id="aNewUser" href="#">New User?</a>
+                </div>
+                <div class="mdl-cell--4-col" style="text-align:right">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+                    onclick="loginUser()">
+                        LOGIN
+                    </button>
+                </div>  
+            </div>
+            <span id="loginErrMsg" style="color:#d50000">Here comes the login error message !!</span>
+        </div>
+        
+    </div>
+    <div class="mdl-cell--4-col"></div>
+</div>
+
+<dialog id="dialogNewUser" class="mdl-dialog" style="width:60%">
+    <div class="mdl-grid mdl-grid--no-spacing dialog-header">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
+            Create New User
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#dialogNewUser')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+    <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
+                <input class="mdl-textfield__input" type="text" id="txtCoupon"  pattern="[A-Za-z ]*"/>
+                <label class="mdl-textfield__label" for="txtCoupon">Coupon</label>
+                <span id="couponErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+            </div>
+        </div>
+        <!-- <div class="mdl-cell mdl-cell--6-col" style="padding:10px 0px 0px 75px">
+            <button id="btnValidateCoupon" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect close">Validate Coupon</button>
+        </div> -->
+    </div>
+    <!-- <div id="hiddenContent" style="display:none"> -->
+    <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
+                <input class="mdl-textfield__input" type="text" id="txtName"  pattern="[A-Za-z ]*"/>
+                <label class="mdl-textfield__label" for="txtName">Name</label>
+                <span id="userNameErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
+                <input class="mdl-textfield__input" type="text" id="txtLoginId"  pattern="[A-Za-z ]*"/>
+                <label class="mdl-textfield__label" for="txtLoginId">Login Id</label>
+                <span id="loginIdErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
+                <input class="mdl-textfield__input" type="password" id="txtPassword"  pattern="[A-Za-z ]*"/>
+                <label class="mdl-textfield__label" for="txtPassword">Password</label>
+                <span id="passwordErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
+                <input class="mdl-textfield__input" type="password" id="txtConfirmPassword"  pattern="[A-Za-z ]*"/>
+                <label class="mdl-textfield__label" for="txtConfirmPassword">Confirm Password</label>
+                <span id="confirmPasswordErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
+                <select class="mdl-textfield__input" id="selSecQue1">
+                    <option></option>
+                    <option value="1">Question 1</option>
+                    <option value="2">Question 2</option>
+                    <option value="3">Question 3</option>
+                </select>
+                <label class="mdl-textfield__label" for="selSecQue1">Security Question 1</label>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
+                <input class="mdl-textfield__input" type="password" id="txtSecurityAns1"  pattern="[A-Za-z ]*"/>
+                <label class="mdl-textfield__label" for="txtSecurityAns1">Security Answer 1</label>
+                <span id="securityAns1Err" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
+                <select class="mdl-textfield__input" id="selSecQue2">
+                    <option></option>
+                    <option value="1">Question 1</option>
+                    <option value="2">Question 2</option>
+                    <option value="3">Question 3</option>
+                </select>
+                <label class="mdl-textfield__label" for="selSecQue2">Security Question 2</label>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
+                <input class="mdl-textfield__input" type="password" id="txtSecurityAns2"  pattern="[A-Za-z ]*"/>
+                <label class="mdl-textfield__label" for="txtSecurityAns2">Security Answer 2</label>
+                <span id="securityAns2Err" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+            </div>
+        </div>
+    </div>
+    <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
+                <select class="mdl-textfield__input" id="selSecQue3">
+                    <option></option>
+                    <option value="1">Question 1</option>
+                    <option value="2">Question 2</option>
+                    <option value="3">Question 3</option>
+                </select>
+                <label class="mdl-textfield__label" for="selSecQue3">Security Question 3</label>
+            </div>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
+                <input class="mdl-textfield__input" type="password" id="txtSecurityAns3"  pattern="[A-Za-z ]*"/>
+                <label class="mdl-textfield__label" for="txtSecurityAns3">Security Answer 3</label>
+                <span id="securityAns3Err" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
+            </div>
+        </div>
+    </div>
+    <div class="dialog-footer">
+        <button id="btnRegisterUser" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+        onclick="">Register</button>
+    </div>    
+</dialog>
+
+<script src="./js/material.min.js"></script>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/fleetui.js"></script>
+<script>
+    $('#btnValidateCoupon').click(function(){
+        alert("Hi");
+        document.getElementById("hiddenContent").style.display = "block";
+        //$('#hiddenContent').css("display:block");
+    });
+</script>

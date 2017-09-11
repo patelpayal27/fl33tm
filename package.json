@@ -1,0 +1,17 @@
+{
+  "name": "FleetM",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+   "package-win": "electron-packager . --overwrite --asar=true --icon=images/icon.ico --prune=true --version-string.CompanyName=AP --version-string.FileDescription=AP --version-string.ProductName=\"FleetM\""
+   ,"package-win32": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=images/icon.ico --prune=true --version-string.CompanyName=AP --version-string.FileDescription=AP --version-string.ProductName=\"FleetM\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.6.8"
+  },
+  "devDependencies": {"electron": "1.6.8"},
+  "description": ""
+}
