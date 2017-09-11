@@ -507,15 +507,6 @@ function loadLogin() {
     });
 }
 
-$('#cities-panel #btnAddCityMain').click(function(){ loaddialog('#dialogCity'); });
-$('#consign-panel #btnAddConsignMain').click(function(){ loaddialog('#dialogConsign'); });
-$('#drivers-panel #btnAddDriverMain').click(function(){ loaddialog('#dialogDriver'); });
-$('#vehicle-panel #btnAddVehicleMain').click(function(){ loaddialog('#dialogVehicle'); });
-$('#btnAddPaymentTypeMain').click(function(){ loaddialog('#dialogPaymentType'); });
-$('#btnAddPriorityMain').click(function(){ loaddialog('#dialogPriority'); });
-$('#btnAddGRTypeMain').click(function(){ loaddialog('#dialogGRType'); });
-$('#btnAddTLTypeMain').click(function(){ loaddialog('#dialogTruckLoadType'); });
-
 function LoadDropDowns(){
     loadCity();
     loadDestination();
