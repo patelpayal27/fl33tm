@@ -14,18 +14,18 @@
         <div  class="mdl-cell mdl-cell--2-col pad-5lr" >
                 <span class="floated-label">S.T. Paid By</span><br/>
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radConsigner">
-                    <input tabindex="3"  type="radio" id="radConsigner" class="mdl-radio__button" name="options" value="Consigner" checked>
+                    <input tabindex="3" type="radio" id="radConsigner" class="mdl-radio__button" name="options" value="Consigner" checked>
                     <span class="mdl-radio__label">Consigner</span>
                 </label>&nbsp;&nbsp;&nbsp;
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radConsignee">
-                    <input tabindex="3"  type="radio" id="radConsignee" class="mdl-radio__button" name="options" value="Consignee">
+                    <input tabindex="3" type="radio" id="radConsignee" class="mdl-radio__button" name="options" value="Consignee">
                     <span class="mdl-radio__label">Consignee</span>
                 </label>
         </div>   
         <div class="mdl-cell mdl-cell--2-col pad-5lr">    
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input tabindex="4"  class="mdl-textfield__input flatpickr flatpickr-input" type="text" id="txtGrNo"/>
-                <label class="mdl-textfield__label" for="txtGrNo">G. R. Date</label>
+                <input tabindex="4" class="mdl-textfield__input flatpickr flatpickr-input" type="text" id="txtGrDate"/>
+                <label class="mdl-textfield__label" for="txtGrDate">G. R. Date</label>
             </div>
         </div>   
     
@@ -34,50 +34,38 @@
         <div id="consignPackPanel" class="mdl-cell mdl-cell--9-col pad-5lr mdl-shadow--2dp full-widht-textbox">
             <div style="padding: 10px 5px 10px 5px;" class="section-header">Consigner-Consignee Detail:</div> 
             <div  class="mdl-grid mdl-grid--no-spacing pad-5lr" >
+                <button id="btnTEST" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+                    onclick="LoadDropDowns()">Load DropDowns
+                </button>
+                <button id="btnTEST1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+                    onclick="loadGRData()">Load Data
+                </button>
+            </div>
+            <div class="mdl-grid mdl-grid--no-spacing pad-5lr">
                 <div class="mdl-cell mdl-cell--3-col">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <select tabindex="5" class="mdl-textfield__input" id="selFromCity">
-                            <option></option>
-                            <option value="1">Item 1</option>
-                            <option value="2">Item 2</option>
-                            <option value="3">Item 3</option>
-                        </select>
+                        <select tabindex="5" class="mdl-textfield__input" id="selFromCity"></select>
                         <label class="mdl-textfield__label" for="selFromCity">From City</label>
                     </div>
                 </div>
 
                 <div class="mdl-cell mdl-cell--3-col pad-5lr">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <select tabindex="6" class="mdl-textfield__input" id="selDestination">
-                            <option></option>
-                            <option value="1">Item 1</option>
-                            <option value="2">Item 2</option>
-                            <option value="3">Item 3</option>
-                        </select>
+                        <select tabindex="6" class="mdl-textfield__input" id="selDestination"></select>
                         <label class="mdl-textfield__label" for="selDestination">Destination</label>
                     </div>
                 </div>
 
-                <div class="mdl-cell mdl-cell--4-col pad-5lr">
+                <div class="mdl-cell mdl-cell--3-col pad-5lr">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <select tabindex="7" class="mdl-textfield__input" id="selDriverName">
-                            <option></option>
-                            <option value="1">Item 1</option>
-                            <option value="2">Item 2</option>
-                            <option value="3">Item 3</option>
-                        </select>
+                        <select tabindex="7" class="mdl-textfield__input" id="selDriverName"></select>
                         <label class="mdl-textfield__label" for="selDriverName">Driver Name</label>
                     </div>
                 </div>
 
-                <div class="mdl-cell mdl-cell--2-col pad-5lr">
+                <div class="mdl-cell mdl-cell--3-col pad-5lr">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <select tabindex="8" class="mdl-textfield__input" id="selVehicleNo">
-                            <option></option>
-                            <option value="1">Item 1</option>
-                            <option value="2">Item 2</option>
-                            <option value="3">Item 3</option>
-                        </select>
+                        <select tabindex="8" class="mdl-textfield__input" id="selVehicleNo"></select>
                         <label class="mdl-textfield__label" for="selVehicleNo">Vehicle No.</label>
                     </div>   
                 </div>         
@@ -88,7 +76,7 @@
                         <input tabindex="9"  class="mdl-textfield__input" type="text" id="txtConsignerName"/>
                         <label class="mdl-textfield__label" for="txtConsignerName">Consigner Name</label>
                     </div>
-                    <div>
+                    <div id="divAddressConsigner">
                         Here Comes the address and all other 
                         asdas
                         asdsa
@@ -101,7 +89,7 @@
                         <input tabindex="10"  class="mdl-textfield__input" type="text" id="txtConsigneeName"/>
                         <label class="mdl-textfield__label" for="txtConsigneeName">Consignee Name</label>
                     </div>
-                    <div>
+                    <div id="divAddressConsignee">
                         Here Comes the address and all other 
                         asdas
                         asdsa
@@ -130,22 +118,22 @@
 
                     <div class="mdl-cell mdl-cell--2-col pad-5lr">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input tabindex="13"  class="mdl-textfield__input" type="text" id="txtActualWt"/>
-                            <label class="mdl-textfield__label" for="txtActualWt">Actual Wt</label>
+                            <input tabindex="13"  class="mdl-textfield__input" type="text" id="txtActualWtPMD"/>
+                            <label class="mdl-textfield__label" for="txtActualWtPMD">Actual Wt</label>
                         </div>
                     </div>
 
                     <div class="mdl-cell mdl-cell--3-col pad-5lr">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input tabindex="14"  class="mdl-textfield__input" type="text" id="txtRate"/>
-                            <label class="mdl-textfield__label" for="txtRate">Rate</label>
+                            <input tabindex="14"  class="mdl-textfield__input" type="text" id="txtRatePMD"/>
+                            <label class="mdl-textfield__label" for="txtRatePMD">Rate</label>
                         </div>   
                     </div>                 
 
                     <div class="mdl-cell mdl-cell--3-col pad-5lr">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input tabindex="15"  class="mdl-textfield__input" type="text" id="txtChgWt"/>
-                            <label class="mdl-textfield__label" for="txtChgWt">P. Market</label>
+                            <input tabindex="15"  class="mdl-textfield__input" type="text" id="txtPMarket"/>
+                            <label class="mdl-textfield__label" for="txtPMarket">P. Market</label>
                         </div>
                     </div>
 
@@ -169,12 +157,7 @@
         </div>
         <div id="paymentPanel" class="mdl-cell mdl-cell--3-col pad-5lr mdl-shadow--2dp full-widht-textbox">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <select tabindex="18" class="mdl-textfield__input" id="selGRType">
-                    <option></option>
-                    <option value="1">Item 1</option>
-                    <option value="2">Item 2</option>
-                    <option value="3">Item 3</option>
-                </select>
+                <select tabindex="18" class="mdl-textfield__input" id="selGRType"></select>
                 <label class="mdl-textfield__label" for="selGRType">G.R. Type</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -255,12 +238,7 @@
 
         <div class="mdl-cell mdl-cell--2-col pad-5lr">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <select tabindex="27" class="mdl-textfield__input" id="selFTL">
-                    <option></option>
-                    <option value="1">Item 1</option>
-                    <option value="2">Item 2</option>
-                    <option value="3">Item 3</option>
-                </select>
+                <select tabindex="27" class="mdl-textfield__input" id="selFTL"></select>
                 <label class="mdl-textfield__label" for="selFTL">FTL</label>
             </div>
         </div>
@@ -289,12 +267,7 @@
 
         <div class="mdl-cell mdl-cell--2-col pad-5lr">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <select tabindex="31" class="mdl-textfield__input" id="selPri">
-                    <option></option>
-                    <option value="1">Item 1</option>
-                    <option value="2">Item 2</option>
-                    <option value="3">Item 3</option>
-                </select>
+                <select tabindex="31" class="mdl-textfield__input" id="selPriority"></select>
                 <label class="mdl-textfield__label" for="selPri">Priority</label>
             </div>
         </div>

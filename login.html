@@ -69,11 +69,7 @@
                 <span id="couponErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
             </div>
         </div>
-        <!-- <div class="mdl-cell mdl-cell--6-col" style="padding:10px 0px 0px 75px">
-            <button id="btnValidateCoupon" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect close">Validate Coupon</button>
-        </div> -->
     </div>
-    <!-- <div id="hiddenContent" style="display:none"> -->
     <div class="mdl-grid mdl-grid--no-spacing">
         <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
@@ -110,10 +106,10 @@
         <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
                 <select class="mdl-textfield__input" id="selSecQue1">
-                    <option></option>
-                    <option value="1">Question 1</option>
-                    <option value="2">Question 2</option>
-                    <option value="3">Question 3</option>
+                    <option selected disabled hidden value=""></option>
+                    <option value="1">What is your first bank name?</option>
+                    <option value="2">What is your pet's name?</option>
+                    <option value="3">What is your first boss name?</option>
                 </select>
                 <label class="mdl-textfield__label" for="selSecQue1">Security Question 1</label>
             </div>
@@ -130,10 +126,10 @@
         <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
                 <select class="mdl-textfield__input" id="selSecQue2">
-                    <option></option>
-                    <option value="1">Question 1</option>
-                    <option value="2">Question 2</option>
-                    <option value="3">Question 3</option>
+                    <option selected disabled hidden value=""></option>
+                    <option value="1">What is your favourite colour?</option>
+                    <option value="2">What is your favourite game?</option>
+                    <option value="3">What is your favourite TV series?</option>
                 </select>
                 <label class="mdl-textfield__label" for="selSecQue2">Security Question 2</label>
             </div>
@@ -150,10 +146,10 @@
         <div class="mdl-cell mdl-cell--6-col">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:95%">
                 <select class="mdl-textfield__input" id="selSecQue3">
-                    <option></option>
-                    <option value="1">Question 1</option>
-                    <option value="2">Question 2</option>
-                    <option value="3">Question 3</option>
+                    <option selected disabled hidden value=""></option>
+                    <option value="1">What is your favourite movie name?</option>
+                    <option value="2">What is your favourite actor name?</option>
+                    <option value="3">What is your favourite actress name?</option>
                 </select>
                 <label class="mdl-textfield__label" for="selSecQue3">Security Question 3</label>
             </div>
@@ -169,16 +165,11 @@
     <div class="dialog-footer">
         <button id="btnRegisterUser" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
         onclick="">Register</button>
-    </div>    
+    </div>
 </dialog>
 
 <script src="./js/material.min.js"></script>
 <script src="./js/jquery.min.js"></script>
 <script src="./js/fleetui.js"></script>
 <script>
-    $('#btnValidateCoupon').click(function(){
-        alert("Hi");
-        document.getElementById("hiddenContent").style.display = "block";
-        //$('#hiddenContent').css("display:block");
-    });
 </script>
