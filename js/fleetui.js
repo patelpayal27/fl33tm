@@ -507,6 +507,194 @@ function loadLogin() {
     });
 }
 
+$('#cities-panel #btnAddCityMain').click(function(){ loaddialog('#dialogCity'); });
+$('#consign-panel #btnAddConsignMain').click(function(){ loaddialog('#dialogConsign'); });
+$('#drivers-panel #btnAddDriverMain').click(function(){ loaddialog('#dialogDriver'); });
+$('#vehicle-panel #btnAddVehicleMain').click(function(){ loaddialog('#dialogVehicle'); });
+$('#btnAddPaymentTypeMain').click(function(){ loaddialog('#dialogPaymentType'); });
+$('#btnAddPriorityMain').click(function(){ loaddialog('#dialogPriority'); });
+$('#btnAddGRTypeMain').click(function(){ loaddialog('#dialogGRType'); });
+$('#btnAddTLTypeMain').click(function(){ loaddialog('#dialogTruckLoadType'); });
+
+function LoadDropDowns(){
+    loadCity();
+    loadDestination();
+    loadDriverName();
+    loadVehicleNo();
+    loadGRType();
+    loadFTL();
+    loadPriority();
+}
+function loadCity(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+            $("#selFromCity").children().remove();
+            $("#selFromCity").append('<option selected disabled hidden value=""></option>');
+            var resDataJson = '[{ "cityId":1, "cityName":"Mumbai" },{ "cityId":2, "cityName":"Pune" },{ "cityId":3, "cityName":"Ahmedabad" },{ "cityId":4, "cityName":"Bangalore" },{ "cityId":5, "cityName":"Delhi" }]';
+            var resData = JSON.parse(resDataJson);
+            resData.forEach(function(element) {
+                $("#selFromCity").append('<option value=' + element.cityId + '>' + element.cityName + '</option>');
+            }, this);
+    //     }
+    // );
+}
+function loadDestination(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+            $("#selDestination").children().remove();
+            $("#selDestination").append('<option selected disabled hidden value=""></option>');
+            var resDataJson = '[{ "cityId":1, "cityName":"Mumbai" },{ "cityId":2, "cityName":"Pune" },{ "cityId":3, "cityName":"Ahmedabad" },{ "cityId":4, "cityName":"Bangalore" },{ "cityId":5, "cityName":"Delhi" }]';
+            var resData = JSON.parse(resDataJson);
+            resData.forEach(function(element) {
+                $("#selDestination").append('<option value=' + element.cityId + '>' + element.cityName + '</option>');
+            }, this);
+    //     }
+    // );
+}
+function loadDriverName(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+            $("#selDriverName").children().remove();
+            $("#selDriverName").append('<option selected disabled hidden value=""></option>');
+            var resDataJson = '[{ "cityId":1, "cityName":"Payal Patel" },{ "cityId":2, "cityName":"Aditya Toshniwal" },{ "cityId":3, "cityName":"Parshwa Shah" },{ "cityId":4, "cityName":"Rachit Bhatnagar" },{ "cityId":5, "cityName":"Bhumika Sanghvi" }]';
+            var resData = JSON.parse(resDataJson);
+            resData.forEach(function(element) {
+                $("#selDriverName").append('<option value=' + element.cityId + '>' + element.cityName + '</option>');
+            }, this);
+    //     }
+    // );
+}
+function loadVehicleNo(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+            $("#selVehicleNo").children().remove();
+            $("#selVehicleNo").append('<option selected disabled hidden value=""></option>');
+            var resDataJson = '[{ "cityId":1, "cityName":"XXX XXXX 2519" },{ "cityId":2, "cityName":"XXX XXXX 2519" },{ "cityId":3, "cityName":"XXX XXXX 2519" },{ "cityId":4, "cityName":"XXX XXXX 2519" },{ "cityId":5, "cityName":"XXX XXXX 2519" }]';
+            var resData = JSON.parse(resDataJson);
+            resData.forEach(function(element) {
+                $("#selVehicleNo").append('<option value=' + element.cityId + '>' + element.cityName + '</option>');
+            }, this);
+    //     }
+    // );
+}
+function loadGRType(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+            $("#selGRType").children().remove();
+            $("#selGRType").append('<option selected disabled hidden value=""></option>');
+            var resDataJson = '[{ "cityId":1, "cityName":"GRType 1" },{ "cityId":2, "cityName":"GRType 2" },{ "cityId":3, "cityName":"GRType 3" },{ "cityId":4, "cityName":"GRType 4" },{ "cityId":5, "cityName":"GRType 5" }]';
+            var resData = JSON.parse(resDataJson);
+            resData.forEach(function(element) {
+                $("#selGRType").append('<option value=' + element.cityId + '>' + element.cityName + '</option>');
+            }, this);
+    //     }
+    // );
+}
+function loadFTL(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+            $("#selFTL").children().remove();
+            $("#selFTL").append('<option selected disabled hidden value=""></option>');
+            var resDataJson = '[{ "cityId":1, "cityName":"FTL 1" },{ "cityId":2, "cityName":"FTL 2" },{ "cityId":3, "cityName":"FTL 3" },{ "cityId":4, "cityName":"FTL 4" },{ "cityId":5, "cityName":"FTL 5" }]';
+            var resData = JSON.parse(resDataJson);
+            resData.forEach(function(element) {
+                $("#selFTL").append('<option value=' + element.cityId + '>' + element.cityName + '</option>');
+            }, this);
+    //     }
+    // );
+}
+function loadPriority(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+            $("#selPriority").children().remove();
+            $("#selPriority").append('<option selected disabled hidden value=""></option>');
+            var resDataJson = '[{ "cityId":1, "cityName":"Lowest" },{ "cityId":2, "cityName":"Low" },{ "cityId":3, "cityName":"Normal" },{ "cityId":4, "cityName":"High" },{ "cityId":5, "cityName":"Highest" }]';
+            var resData = JSON.parse(resDataJson);
+            resData.forEach(function(element) {
+                $("#selPriority").append('<option value=' + element.cityId + '>' + element.cityName + '</option>');
+            }, this);
+    //     }
+    // );
+}
+function loadGRData(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+            
+            var resDataJson = '[{ "GRNO":1, "BranchCode":"Mumbai", "STPaidBy":"Consignee", "GRDate":"01/01/2017", "FromCity":"1", "Destination":"2", "DriverName":"3", "VehicleNo":"4", "ConsignerName":"Payal Patel", "ConsignerAddr":"Address Line 1, Address Line 2, Address Line 3", "ConsignerPinCode":"400007", "ConsigneeName":"Aditya Patel", "ConsigneeAddr":"Address Line 1, Address Line 2, Address Line 3", "ConsigneePinCode":"400007", "Method":"Method X", "Description":"Description XYZ", "GRType":"3", "Freight":"Freight XYZ", "CoverCharge":"5000", "DoorDelivery":"4000", "StatisticalCharge":"1000", "RiskCharge":"500", "ServiceTax":"800", "GreenTax":"500", "Total":"50000", "TotalPackages":"100", "ActWt":"5000", "ChgWt":"5000", "Rate":"4000", "FTL":"2", "PartyInvoice":"PartyInvoice XYZ", "PartyInvoiceDate":"01012016", "Remarks":"Remarks XYZ", "Priority":"5" }]';
+            var resData = JSON.parse(resDataJson);
+            resData.forEach(function(element) {
+                //alert("loadGRData - " + element.GRNO + ", " + element.BranchCode + ", " + element.STPaidBy + ", " + element.GRDate);
+                $("#txtGrNo").val(element.GRNO);
+                //$("#txtGrNo").MaterialTextfield.change(element.GRNO);
+                $("#txtBranchCode").val(element.BranchCode);
+                $('input:radio[name="options"][value="' + element.STPaidBy + '"]').parent().addClass('is-checked');
+                $("#txtGrDate").val(element.GRDate);
+                $("#selFromCity").val('' + element.FromCity + '');
+                $("#selDestination").val('' + element.Destination + '');
+                $("#selDriverName").val('' + element.DriverName + '');
+                $("#selVehicleNo").val('' + element.VehicleNo + '');
+                $("#txtConsignerName").val(element.ConsignerName);
+                $("#divAddressConsigner").text(element.ConsignerAddr);
+                $('#divAddressConsigner').append('<br/>' + element.ConsignerPinCode);
+                $("#txtConsigneeName").val(element.ConsigneeName);
+                $("#divAddressConsignee").text(element.ConsigneeAddr);
+                $('#divAddressConsignee').append('<br/>' + element.ConsigneePinCode);
+                $("#txtMethod").val(element.Method);
+                $("#txtDesc").val(element.Description);
+                $("#selGRType").val('' + element.GRType + '');
+                $("#txtFreight").val(element.Freight);
+                $("#txtSomething").val(element.Freight);
+                $("#txtCoverCharge").val(element.CoverCharge);
+                $("#txtDoorDeliveryCharge").val(element.DoorDelivery);
+                $("#txtStatisticalCharge").val(element.StatisticalCharge);
+                $("#txtRiskCharge").val(element.RiskCharge);
+                $("#txtServiceTax").val(element.ServiceTax);
+                $("#txtGreenTax").val(element.GreenTax);
+                $("#txtTotal").val(element.Total);
+                $("#txtTotPkgs").val(element.TotalPackages);
+                $("#txtActualWt").val(element.ActWt);
+                $("#txtChgWt").val(element.ChgWt);
+                $("#txtRate").val(element.Rate);
+                $("#selFTL").val(element.FTL);
+                $("#txtPartyInv").val(element.PartyInvoice);
+                $("#txtPartyInvDate").val(element.PartyInvoiceDate);
+                $("#txtRemarks").val(element.Remarks);
+                $("#selPriority").val(element.Priority);
+
+                // Floating Label not working when value is autofilled in textboxes. Hence below code. checkDirty updates MDL state explicitly if necessary.  "is-dirty" is the class that triggers the floating label.//
+                var nodeList = document.querySelectorAll('.mdl-textfield');
+                Array.prototype.forEach.call(nodeList, function (elem) {
+                    elem.MaterialTextfield.checkDirty();
+                });
+            }, this);
+    //     }
+    // );
+}
+
 /*********** WEB service API  ****************/
 function callWebService(methodtype, urlToCall, serviceParameter, sucessCallbackFunc, 
                         failCallBackFunc = function(){}
