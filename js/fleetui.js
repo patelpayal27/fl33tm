@@ -140,6 +140,8 @@ function showGrDialog(i_grNo) {
     $('#divDialogContent').load('grbook.html', function(){
         componentHandler.upgradeAllRegistered();
         loadFlatpickr();
+        loadDropDowns();
+        loadGRData();
         $('[tabindex=1]').focus();
     });
     $('#divGrDialog')[0].showModal();
@@ -421,7 +423,6 @@ function closeDialog(elId) {
     $(elId)[0].close();
 }
 
-
 function scrollToBottom(){
     $("html, body").animate({ scrollTop: $(document).height() }, 1000);
 }
@@ -482,8 +483,7 @@ function loadGraph() {
     });
 }
 
-function loadDashboard()
-{
+function loadDashboard(){
     $('#container').load('./dashboard.html', function(){
         componentHandler.upgradeAllRegistered();
         $('#user-page-content').load('dashboard_content.html', function(){
@@ -491,8 +491,6 @@ function loadDashboard()
             componentHandler.upgradeAllRegistered(); 
             loadGraph();
         });
-
-            
     });
 
     $( ".mdl-layout__drawer" ).bind( "click", function() {
@@ -507,7 +505,83 @@ function loadLogin() {
     });
 }
 
-function LoadDropDowns(){
+function loadConsignerDialog(){ 
+    getConsignerData();
+    loaddialog('#dialogConsigner');
+}
+function getConsignerData() {
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+        divConsignerData = $("#divConsignerData");
+        divConsignerData.empty();
+
+        var resDataJson = '[{ "Id":1, "Name":"Payal Patel", "Address":"Address Payal", "Pincode":"400007 Pincode Payal" },{ "Id":2, "Name":"Aditya Toshniwal", "Address":"Address Aditya", "Pincode":"400007 Pincode Aditya" },{ "Id":3, "Name":"Parshwa Shah", "Address":"Address Parshwa", "Pincode":"400007 Pincode Parshwa" },{ "Id":4, "Name":"Rachit Bhatnagar", "Address":"Address Rachit", "Pincode":"400007 Pincode Rachit" },{ "Id":5, "Name":"Bhumika Sanghvi", "Address":"Address Bhumika", "Pincode":"400007 Pincode Bhumika" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            //alert(element.Id + ", " + element.Name + ", " + element.Address + ", " + element.Pincode);
+            divEl = `
+            <div class="mdl-grid data-list-item grsearch-item" data-consignerid="`+element.Id+`" data-name="`+element.Name+`" data-address="`+element.Address+`" data-pincode="`+element.Pincode+`">
+                <div class="mdl-cell mdl-cell--2-col">
+                    <span>`+element.Id+`</span>
+                </div>
+                <div class="mdl-cell mdl-cell--10-col">
+                    <span>`+element.Name+`</span>
+                </div>
+            </div>`;
+            divConsignerData.append(divEl);
+        }, this);
+        $(".grsearch-item").on("dblclick",function(){
+            //alert("$(this).data('id') = " + $(this).data("consignerid"));
+            $("#txtConsignerName").val($(this).data("name"));
+            $("#divAddressConsigner").text($(this).data("address"));
+            $("#divAddressConsigner").append('<br/>' + $(this).data("pincode"));
+            closeDialog("#dialogConsigner");
+        });
+    //     }
+    // );
+}
+function loadConsigneeDialog(){ 
+    getConsigneeData();
+    loaddialog('#dialogConsignee');
+}
+function getConsigneeData() {
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+        divConsigneeData = $("#divConsigneeData");
+        divConsigneeData.empty();
+
+        var resDataJson = '[{ "Id":1, "Name":"Payal Patel", "Address":"Address Payal", "Pincode":"400007 Pincode Payal" },{ "Id":2, "Name":"Aditya Toshniwal", "Address":"Address Aditya", "Pincode":"400007 Pincode Aditya" },{ "Id":3, "Name":"Parshwa Shah", "Address":"Address Parshwa", "Pincode":"400007 Pincode Parshwa" },{ "Id":4, "Name":"Rachit Bhatnagar", "Address":"Address Rachit", "Pincode":"400007 Pincode Rachit" },{ "Id":5, "Name":"Bhumika Sanghvi", "Address":"Address Bhumika", "Pincode":"400007 Pincode Bhumika" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            //alert(element.Id + ", " + element.Name + ", " + element.Address + ", " + element.Pincode);
+            divEl = `
+            <div class="mdl-grid data-list-item grsearch-item" data-consigneeid="`+element.Id+`" data-name="`+element.Name+`" data-address="`+element.Address+`" data-pincode="`+element.Pincode+`">
+                <div class="mdl-cell mdl-cell--2-col">
+                    <span>`+element.Id+`</span>
+                </div>
+                <div class="mdl-cell mdl-cell--10-col">
+                    <span>`+element.Name+`</span>
+                </div>
+            </div>`;
+            divConsigneeData.append(divEl);
+        }, this);
+        $(".grsearch-item").on("dblclick",function(){
+            //alert("$(this).data('id') = " + $(this).data("consigneeid"));
+            $("#txtConsigneeName").val($(this).data("name"));
+            $("#divAddressConsignee").text($(this).data("address"));
+            $("#divAddressConsignee").append('<br/>' + $(this).data("pincode"));
+            closeDialog("#dialogConsignee");
+        });
+    //     }
+    // );
+}
+function loadDropDowns(){
     loadCity();
     loadDestination();
     loadDriverName();
@@ -640,7 +714,6 @@ function loadGRData(){
             resData.forEach(function(element) {
                 //alert("loadGRData - " + element.GRNO + ", " + element.BranchCode + ", " + element.STPaidBy + ", " + element.GRDate);
                 $("#txtGrNo").val(element.GRNO);
-                //$("#txtGrNo").MaterialTextfield.change(element.GRNO);
                 $("#txtBranchCode").val(element.BranchCode);
                 $('input:radio[name="options"][value="' + element.STPaidBy + '"]').parent().addClass('is-checked');
                 $("#txtGrDate").val(element.GRDate);
@@ -650,10 +723,10 @@ function loadGRData(){
                 $("#selVehicleNo").val('' + element.VehicleNo + '');
                 $("#txtConsignerName").val(element.ConsignerName);
                 $("#divAddressConsigner").text(element.ConsignerAddr);
-                $('#divAddressConsigner').append('<br/>' + element.ConsignerPinCode);
+                $("#divAddressConsigner").append('<br/>' + element.ConsignerPinCode);
                 $("#txtConsigneeName").val(element.ConsigneeName);
                 $("#divAddressConsignee").text(element.ConsigneeAddr);
-                $('#divAddressConsignee').append('<br/>' + element.ConsigneePinCode);
+                $("#divAddressConsignee").append('<br/>' + element.ConsigneePinCode);
                 $("#txtMethod").val(element.Method);
                 $("#txtDesc").val(element.Description);
                 $("#selGRType").val('' + element.GRType + '');
