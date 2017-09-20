@@ -200,8 +200,15 @@ function bindMasterEvents() {
     $('#btnAddTLTypeMain').on("click",function(){ loaddialog('#dialogTruckLoadType'); });
 }
 
-$('#btnCreateCoupon').click(function(){ loaddialog('#dialogCoupon'); });
-$('#aNewUser').click(function(){ loaddialog('#dialogNewUser'); });
+function bindLoginEvents() {
+    $('#btnSettings').click(function(){ loadSettingsDialog(); });
+    $('#btnSaveSettings').click(function(){ saveSettings(); });
+    $('#aNewUser').click(function(){ loaddialog('#dialogNewUser'); });
+}
+
+function bindUserManagerEvents() {
+    $('#btnCreateCoupon').click(function(){ loaddialog('#dialogCoupon'); });
+}
 
 function loaddialog(dialogId){
     var v_dialog = $(dialogId)[0];
@@ -505,7 +512,36 @@ function loadLogin() {
     });
 }
 
-function loadConsignerDialog(){ 
+function loadSettingsDialog() { 
+    getSettings();
+    loaddialog('#dialogSettings');
+}
+function getSettings() {
+    var fs = require('fs');
+    fs.readFile('./settings', 'utf-8', function (err,data) {
+        if (err) {
+            return alert(err);
+        }
+        $("#txtServerName").val(data);
+
+        // Floating Label not working when value is autofilled in textboxes. Hence below code. checkDirty updates MDL state explicitly if necessary.  "is-dirty" is the class that triggers the floating label.//
+        var nodeList = $(".mdl-textfield");
+        Array.prototype.forEach.call(nodeList, function (elem) {
+            elem.MaterialTextfield.checkDirty();
+        });
+    });
+}
+function saveSettings(){
+    var fs = require('fs');
+    var content = $("#txtServerName").val();
+    try { 
+        fs.writeFileSync('settings', content, 'utf-8');
+        alert("Settings saved successfully");
+        closeDialog("#dialogSettings");
+    }
+    catch(e) { alert('Failed to save settings !'); }
+}
+function loadConsignerDialog() { 
     getConsignerData();
     loaddialog('#dialogConsigner');
 }
@@ -712,7 +748,6 @@ function loadGRData(){
             var resDataJson = '[{ "GRNO":1, "BranchCode":"Mumbai", "STPaidBy":"Consignee", "GRDate":"01/01/2017", "FromCity":"1", "Destination":"2", "DriverName":"3", "VehicleNo":"4", "ConsignerName":"Payal Patel", "ConsignerAddr":"Address Line 1, Address Line 2, Address Line 3", "ConsignerPinCode":"400007", "ConsigneeName":"Aditya Patel", "ConsigneeAddr":"Address Line 1, Address Line 2, Address Line 3", "ConsigneePinCode":"400007", "Method":"Method X", "Description":"Description XYZ", "GRType":"3", "Freight":"Freight XYZ", "CoverCharge":"5000", "DoorDelivery":"4000", "StatisticalCharge":"1000", "RiskCharge":"500", "ServiceTax":"800", "GreenTax":"500", "Total":"50000", "TotalPackages":"100", "ActWt":"5000", "ChgWt":"5000", "Rate":"4000", "FTL":"2", "PartyInvoice":"PartyInvoice XYZ", "PartyInvoiceDate":"01012016", "Remarks":"Remarks XYZ", "Priority":"5" }]';
             var resData = JSON.parse(resDataJson);
             resData.forEach(function(element) {
-                //alert("loadGRData - " + element.GRNO + ", " + element.BranchCode + ", " + element.STPaidBy + ", " + element.GRDate);
                 $("#txtGrNo").val(element.GRNO);
                 $("#txtBranchCode").val(element.BranchCode);
                 $('input:radio[name="options"][value="' + element.STPaidBy + '"]').parent().addClass('is-checked');
@@ -750,7 +785,7 @@ function loadGRData(){
                 $("#selPriority").val(element.Priority);
 
                 // Floating Label not working when value is autofilled in textboxes. Hence below code. checkDirty updates MDL state explicitly if necessary.  "is-dirty" is the class that triggers the floating label.//
-                var nodeList = document.querySelectorAll('.mdl-textfield');
+                var nodeList = $(".mdl-textfield");
                 Array.prototype.forEach.call(nodeList, function (elem) {
                     elem.MaterialTextfield.checkDirty();
                 });
