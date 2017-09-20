@@ -7,7 +7,6 @@ const fs = require("fs");
 //const dialog = remote.require('dialog'); 
 const {dialog,shell} = require('electron').remote;
 
-
 function sleep(milliseconds) {
     for (var i = 0; i < 1000; i++) {
         null;
@@ -154,21 +153,23 @@ function addPackageToList() {
     txtRate = $("#packageAddPanel2 #txtRate").val();
     txtChgWt = $("#packageAddPanel2 #txtChgWt").val();
     txtCft = $("#packageAddPanel2 #txtCft").val();
+    addPackageDtlsToList(txtMethod, txtDesc, txtActualWt, txtRate, txtChgWt, txtCft);
+}
 
+function addPackageDtlsToList(method, desc, actualwt, rate, chgwt, cft) {
     packList = $("#packageList");
-    
     
     divEl = `
         <div class="mdl-grid data-list-item">
             <div class="mdl-cell mdl-cell--8-col">
                 <div style="font-size:18px">
-                    <span id="lstPackMeth">`+txtMethod+`</span>-<span id="lstPackDesc">`+txtDesc+`</span>
+                    <span id="lstPackMeth">`+method+`</span>-<span id="lstPackDesc">`+desc+`</span>
                 </div>
                 <div>
-                    <span class="fleet-color-text">Actual Wt. :</span><span id="lstPackActWt">`+txtActualWt+`</span>&nbsp;|&nbsp;
-                    <span class="fleet-color-text">Rate :</span><span id="lstPackRate">`+txtRate+`</span>&nbsp;|&nbsp;
-                    <span class="fleet-color-text">P. Marks :</span><span id="lstPackPmarks">`+txtChgWt+`</span>&nbsp;|&nbsp;
-                    <span class="fleet-color-text">CFT :</span><span id="lstPackCft">`+txtCft+`</span>
+                    <span class="fleet-color-text">Actual Wt. :</span><span id="lstPackActWt">`+actualwt+`</span>&nbsp;|&nbsp;
+                    <span class="fleet-color-text">Rate :</span><span id="lstPackRate">`+rate+`</span>&nbsp;|&nbsp;
+                    <span class="fleet-color-text">P. Marks :</span><span id="lstPackPmarks">`+chgwt+`</span>&nbsp;|&nbsp;
+                    <span class="fleet-color-text">CFT :</span><span id="lstPackCft">`+cft+`</span>
                 </div>
             </div>
             <div class="mdl-cell mdl-cell--3-col" style="text-align:right">
@@ -181,14 +182,10 @@ function addPackageToList() {
                 </button>
             </div>            
         </div>`;
-    //alert(divEl);
     packList.append(divEl);
     packList.scrollTop(1E10);
-    // $(this).closest("data-list-item").remove();
-    // $(".grsearch-item").on("click",function(){showGrDialog($(this).data("grno"));});
 }
 
-//Master Data Page Starts
 function bindMasterEvents() {
     $('#cities-panel #btnAddCityMain').on("click",function(){ loaddialog('#dialogCity'); });
     $('#consign-panel #btnAddConsignMain').on("click",function(){ loaddialog('#dialogConsign'); });
@@ -516,6 +513,7 @@ function loadSettingsDialog() {
     getSettings();
     loaddialog('#dialogSettings');
 }
+
 function getSettings() {
     var fs = require('fs');
     fs.readFile('./settings', 'utf-8', function (err,data) {
@@ -531,6 +529,7 @@ function getSettings() {
         });
     });
 }
+
 function saveSettings(){
     var fs = require('fs');
     var content = $("#txtServerName").val();
@@ -541,10 +540,12 @@ function saveSettings(){
     }
     catch(e) { alert('Failed to save settings !'); }
 }
+
 function loadConsignerDialog() { 
     getConsignerData();
     loaddialog('#dialogConsigner');
 }
+
 function getConsignerData() {
     // callWebService(
     //     'GET',
@@ -560,11 +561,9 @@ function getConsignerData() {
             //alert(element.Id + ", " + element.Name + ", " + element.Address + ", " + element.Pincode);
             divEl = `
             <div class="mdl-grid data-list-item grsearch-item" data-consignerid="`+element.Id+`" data-name="`+element.Name+`" data-address="`+element.Address+`" data-pincode="`+element.Pincode+`">
-                <div class="mdl-cell mdl-cell--2-col">
-                    <span>`+element.Id+`</span>
-                </div>
-                <div class="mdl-cell mdl-cell--10-col">
-                    <span>`+element.Name+`</span>
+                <div class="mdl-cell mdl-cell--11-col">
+                    <div><span style="font-size:18px">`+element.Name+`</span></div>
+                    <div><span style="font-size:12px">`+element.Address+` - `+element.Pincode+`</span></div>
                 </div>
             </div>`;
             divConsignerData.append(divEl);
@@ -579,10 +578,12 @@ function getConsignerData() {
     //     }
     // );
 }
+
 function loadConsigneeDialog(){ 
     getConsigneeData();
     loaddialog('#dialogConsignee');
 }
+
 function getConsigneeData() {
     // callWebService(
     //     'GET',
@@ -597,12 +598,10 @@ function getConsigneeData() {
         resData.forEach(function(element) {
             //alert(element.Id + ", " + element.Name + ", " + element.Address + ", " + element.Pincode);
             divEl = `
-            <div class="mdl-grid data-list-item grsearch-item" data-consigneeid="`+element.Id+`" data-name="`+element.Name+`" data-address="`+element.Address+`" data-pincode="`+element.Pincode+`">
-                <div class="mdl-cell mdl-cell--2-col">
-                    <span>`+element.Id+`</span>
-                </div>
-                <div class="mdl-cell mdl-cell--10-col">
-                    <span>`+element.Name+`</span>
+            <div class="mdl-grid data-list-item grsearch-item" data-consignerid="`+element.Id+`" data-name="`+element.Name+`" data-address="`+element.Address+`" data-pincode="`+element.Pincode+`">
+                <div class="mdl-cell mdl-cell--11-col">
+                    <div><span style="font-size:18px">`+element.Name+`</span></div>
+                    <div><span style="font-size:12px">`+element.Address+` - `+element.Pincode+`</span></div>
                 </div>
             </div>`;
             divConsigneeData.append(divEl);
@@ -617,6 +616,7 @@ function getConsigneeData() {
     //     }
     // );
 }
+
 function loadDropDowns(){
     loadCity();
     loadDestination();
@@ -626,6 +626,7 @@ function loadDropDowns(){
     loadFTL();
     loadPriority();
 }
+
 function loadCity(){
     // callWebService(
     //     'GET',
@@ -642,6 +643,7 @@ function loadCity(){
     //     }
     // );
 }
+
 function loadDestination(){
     // callWebService(
     //     'GET',
@@ -658,6 +660,7 @@ function loadDestination(){
     //     }
     // );
 }
+
 function loadDriverName(){
     // callWebService(
     //     'GET',
@@ -674,6 +677,7 @@ function loadDriverName(){
     //     }
     // );
 }
+
 function loadVehicleNo(){
     // callWebService(
     //     'GET',
@@ -690,6 +694,7 @@ function loadVehicleNo(){
     //     }
     // );
 }
+
 function loadGRType(){
     // callWebService(
     //     'GET',
@@ -706,6 +711,7 @@ function loadGRType(){
     //     }
     // );
 }
+
 function loadFTL(){
     // callWebService(
     //     'GET',
@@ -722,6 +728,7 @@ function loadFTL(){
     //     }
     // );
 }
+
 function loadPriority(){
     // callWebService(
     //     'GET',
@@ -738,6 +745,7 @@ function loadPriority(){
     //     }
     // );
 }
+
 function loadGRData(){
     // callWebService(
     //     'GET',
@@ -745,7 +753,7 @@ function loadGRData(){
     //     //reqJson,
     //     function (resJson){
             
-            var resDataJson = '[{ "GRNO":1, "BranchCode":"Mumbai", "STPaidBy":"Consignee", "GRDate":"01/01/2017", "FromCity":"1", "Destination":"2", "DriverName":"3", "VehicleNo":"4", "ConsignerName":"Payal Patel", "ConsignerAddr":"Address Line 1, Address Line 2, Address Line 3", "ConsignerPinCode":"400007", "ConsigneeName":"Aditya Patel", "ConsigneeAddr":"Address Line 1, Address Line 2, Address Line 3", "ConsigneePinCode":"400007", "Method":"Method X", "Description":"Description XYZ", "GRType":"3", "Freight":"Freight XYZ", "CoverCharge":"5000", "DoorDelivery":"4000", "StatisticalCharge":"1000", "RiskCharge":"500", "ServiceTax":"800", "GreenTax":"500", "Total":"50000", "TotalPackages":"100", "ActWt":"5000", "ChgWt":"5000", "Rate":"4000", "FTL":"2", "PartyInvoice":"PartyInvoice XYZ", "PartyInvoiceDate":"01012016", "Remarks":"Remarks XYZ", "Priority":"5" }]';
+            var resDataJson = '[{"GRNO":1,"BranchCode":"Mumbai","STPaidBy":"Consignee","GRDate":"01/01/2017","FromCity":"1","Destination":"2","DriverName":"3","VehicleNo":"4","ConsignerName":"Payal Patel","ConsignerAddr":"Address Line 1, Address Line 2, Address Line 3","ConsignerPinCode":"400007","ConsigneeName":"Aditya Patel","ConsigneeAddr":"Address Line 1, Address Line 2, Address Line 3","ConsigneePinCode":"400007","GRType":"3","Freight":"Freight XYZ","CoverCharge":"5000","DoorDelivery":"4000","StatisticalCharge":"1000","RiskCharge":"500","ServiceTax":"800","GreenTax":"500","Total":"50000","TotalPackages":"100","ActWt":"5000","ChgWt":"5000","Rate":"4000","FTL":"2","PartyInvoice":"PartyInvoice XYZ","PartyInvoiceDate":"01012016","Remarks":"Remarks XYZ","Priority":"5","lstPMD":[{"Method":"Method XYZ","Description":"Description XYZ","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT XYZ"},{"Method":"Method PQR","Description":"Description PQR","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT PQR"},{"Method":"Method ABC","Description":"Description ABC","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT ABC"}]}]';
             var resData = JSON.parse(resDataJson);
             resData.forEach(function(element) {
                 $("#txtGrNo").val(element.GRNO);
@@ -761,9 +769,7 @@ function loadGRData(){
                 $("#divAddressConsigner").append('<br/>' + element.ConsignerPinCode);
                 $("#txtConsigneeName").val(element.ConsigneeName);
                 $("#divAddressConsignee").text(element.ConsigneeAddr);
-                $("#divAddressConsignee").append('<br/>' + element.ConsigneePinCode);
-                $("#txtMethod").val(element.Method);
-                $("#txtDesc").val(element.Description);
+                $("#divAddressConsignee").append('<br/>' + element.ConsigneePinCode);                
                 $("#selGRType").val('' + element.GRType + '');
                 $("#txtFreight").val(element.Freight);
                 $("#txtSomething").val(element.Freight);
@@ -783,6 +789,11 @@ function loadGRData(){
                 $("#txtPartyInvDate").val(element.PartyInvoiceDate);
                 $("#txtRemarks").val(element.Remarks);
                 $("#selPriority").val(element.Priority);
+
+                element.lstPMD.forEach(function(PMDData) {
+                    //alert(PMDData.Method + ", " + PMDData.Description + ", " +  PMDData.ActWt + ", " +  PMDData.Rate + ", " +  PMDData.ChgWt +  ", " + PMDData.CFT);
+                    addPackageDtlsToList(PMDData.Method, PMDData.Description, PMDData.ActWt, PMDData.Rate, PMDData.ChgWt, PMDData.CFT);
+                }, this);
 
                 // Floating Label not working when value is autofilled in textboxes. Hence below code. checkDirty updates MDL state explicitly if necessary.  "is-dirty" is the class that triggers the floating label.//
                 var nodeList = $(".mdl-textfield");

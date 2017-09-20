@@ -299,9 +299,17 @@
     </div>
 
 <dialog id="dialogConsigner" class="mdl-dialog" style="width:30%">
-    <div class="mdl-grid mdl-grid--no-spacing dialog-header">
-        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
-            Select Consigner
+    <div class="mdl-grid mdl-grid--no-spacing">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col"> 
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="txtSearchConsigner">
+                    <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" id="txtSearchConsign">
+                    <label class="mdl-textfield__label" for="txtSearchConsign">Search Consigner</label>
+                </div>
+            </div>
         </div>
         <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
             <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
@@ -310,48 +318,37 @@
             </button>
         </div>
     </div>
-    <div class="mdl-grid data-list-item" style="font-weight:bold" data-consignerid="0" data-name="" data-address="" data-pincode="">
-            <div class="mdl-cell mdl-cell--2-col">
-                <span>ID</span>
-            </div>
-            <div class="mdl-cell mdl-cell--8-col">
-                <span>Consigner Name</span>
-            </div>
-        </div>
     <div id="divConsignerData" class="data-list" style="height:auto">
+        Dummy
     </div>
     <div class="dialog-footer">
         <div style="font-size:medium;font-style:italic;">Double click to select data.</div>
-        <!-- <button id="btnAddGRType" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-        onclick="addGRTypeToList()">Save</button> -->
     </div>
 </dialog>
 <dialog id="dialogConsignee" class="mdl-dialog" style="width:30%">
-        <!-- <div class="mdl-grid mdl-grid--no-spacing dialog-header">
-            <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
-                Select Consignee
-            </div>
-            <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
-                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
-                    onclick="closeDialog('#dialogConsignee')" tabindex="-1">
-                    <i class="material-icons">close</i>
-                </button>
-            </div>
-        </div> -->
-        <div class="mdl-grid data-list-item" style="font-weight:bold" data-consigneeid="0" data-name="" data-address="" data-pincode="">
-            <div class="mdl-cell mdl-cell--2-col">
-                <span>ID</span>
-            </div>
-            <div class="mdl-cell mdl-cell--8-col">
-                <span>Consignee Name</span>
+    <div class="mdl-grid mdl-grid--no-spacing">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col"> 
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="txtSearchConsignee">
+                    <i class="material-icons">search</i>
+                </label>
+                <div class="mdl-textfield__expandable-holder">
+                    <input class="mdl-textfield__input" type="text" id="txtSearchConsign">
+                    <label class="mdl-textfield__label" for="txtSearchConsign">Search Consignee</label>
+                </div>
             </div>
         </div>
-        <div id="divConsigneeData" class="data-list" style="height:auto">
-            Dummy
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#dialogConsignee')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
         </div>
-        <div class="dialog-footer">
-            <div style="font-size:medium;font-style:italic;">Double click to select data.</div>
-            <!-- <button id="btnAddGRType" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-            onclick="addGRTypeToList()">Save</button> -->
-        </div>
-    </dialog>
+    </div>
+    <div id="divConsigneeData" class="data-list" style="height:auto">
+        Dummy
+    </div>
+    <div class="dialog-footer">
+        <div style="font-size:medium;font-style:italic;">Double click to select data.</div>
+    </div>
+</dialog>
