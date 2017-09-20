@@ -1,6 +1,9 @@
 <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--11-col"></div>
     <div class="mdl-cell mdl-cell--1-col" style="text-align:right"> 
+        <button id="btnSettings" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+            <i class="material-icons" style="font-size:28px;">settings</i>
+        </button>
         <button id="btnExit" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
         onclick="exitApp()">
             <i class="material-icons" style="font-size:28px;">power_settings_new</i>
@@ -163,8 +166,32 @@
         </div>
     </div>
     <div class="dialog-footer">
-        <button id="btnRegisterUser" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-        onclick="">Register</button>
+        <button id="btnRegisterUser" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+            Register
+        </button>
+    </div>
+</dialog>
+
+<dialog id="dialogSettings" class="mdl-dialog" style="width:30%">
+    <div class="mdl-grid mdl-grid--no-spacing dialog-header">
+        <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
+            Settings
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="closeDialog('#dialogSettings')" tabindex="-1">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+        <input class="mdl-textfield__input" type="text" id="txtServerName"/>
+        <label class="mdl-textfield__label" for="txtServerName">Server Name</label>
+    </div>
+    <div class="dialog-footer">
+        <button id="btnSaveSettings" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
+            Save
+        </button>
     </div>
 </dialog>
 
@@ -172,4 +199,5 @@
 <script src="./js/jquery.min.js"></script>
 <script src="./js/fleetui.js"></script>
 <script>
+    bindLoginEvents();
 </script>
