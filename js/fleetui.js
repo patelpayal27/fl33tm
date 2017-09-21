@@ -215,13 +215,170 @@ function loaddialog(dialogId){
     // });
 }
 
-function addCityToList() {
-    txtCity = $("#dialogCity #txtCityName").val();
+function loadMasterPanels(){
+    loadCityMasterPanel();
+    loadConsignMasterPanel();
+    loadDriverMasterPanel();
+    loadVehicleMasterPanel();
+    loadPaymentTypeMasterPanel();
+    loadPriorityMasterPanel();
+    loadGRTypeMasterPanel();
+    loadTLTypeMasterPanel();
+}
+
+function loadCityMasterPanel(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+
+        $("#city-List").empty();
+        var resDataJson = '[{ "cityId":1, "cityName":"Mumbai" },{ "cityId":2, "cityName":"Pune" },{ "cityId":3, "cityName":"Ahmedabad" },{ "cityId":4, "cityName":"Bangalore" },{ "cityId":5, "cityName":"Delhi" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            addCityToList(element.cityName);
+        }, this);
+
+    //     }
+    // );
+}
+
+function loadConsignMasterPanel(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+
+        $("#consign-List").empty();
+        var resDataJson = '[{ "Id":1, "Name":"Payal Patel", "Address":"Address Payal", "Pincode":"400007 Pincode Payal" },{ "Id":2, "Name":"Aditya Toshniwal", "Address":"Address Aditya", "Pincode":"400007 Pincode Aditya" },{ "Id":3, "Name":"Parshwa Shah", "Address":"Address Parshwa", "Pincode":"400007 Pincode Parshwa" },{ "Id":4, "Name":"Rachit Bhatnagar", "Address":"Address Rachit", "Pincode":"400007 Pincode Rachit" },{ "Id":5, "Name":"Bhumika Sanghvi", "Address":"Address Bhumika", "Pincode":"400007 Pincode Bhumika" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            addConsignToList(element.Name, element.Address, element.Pincode);
+        }, this);
+
+    //     }
+    // );
+}
+
+function loadDriverMasterPanel(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+
+        $("#driver-List").empty();
+        var resDataJson = '[{ "driverId":1, "driverName":"Payal Patel" },{ "driverId":2, "driverName":"Aditya Toshniwal" },{ "driverId":3, "driverName":"Parshwa Shah" },{ "driverId":4, "driverName":"Rachit Bhatnagar" },{ "driverId":5, "driverName":"Bhumika Sanghvi" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            addDriverToList(element.driverName);
+        }, this);
+
+    //     }
+    // );
+}
+
+function loadVehicleMasterPanel(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+
+        $("#vehicle-List").empty();
+        var resDataJson = '[{ "vehicleId":1, "vehicleName":"vehicleName 123", "vehicleNo":"XXX XXXX 2519" },{ "vehicleId":1, "vehicleName":"vehicleName 456", "vehicleNo":"XXX XXXX 2519" },{ "vehicleId":1, "vehicleName":"vehicleName 789", "vehicleNo":"XXX XXXX 2519" },{ "vehicleId":1, "vehicleName":"vehicleName XYZ", "vehicleNo":"XXX XXXX 2519" },{ "vehicleId":1, "vehicleName":"vehicleName ABC", "vehicleNo":"XXX XXXX 2519" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            addVehicleToList(element.vehicleName, element.vehicleNo);
+        }, this);
+
+    //     }
+    // );
+}
+
+function loadPaymentTypeMasterPanel(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+
+        $("#divPaymentTypeData").empty();
+        var resDataJson = '[{ "paymentTypeSeq":1, "paymentTypeName":"paymentTypeName 123"}, { "paymentTypeSeq":1, "paymentTypeName":"paymentTypeName 456"}, { "paymentTypeSeq":1, "paymentTypeName":"paymentTypeName 789"}]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            addPaymentTypeToList(element.paymentTypeName, element.paymentTypeSeq);
+        }, this);
+
+    //     }
+    // );
+}
+
+function loadPriorityMasterPanel(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+
+        $("#divPriorityData").empty();
+        var resDataJson = '[{ "priorityId":1, "priorityName":"Priority Desc 123"}, { "priorityId":1, "priorityName":"Priority Desc 456"}, { "priorityId":1, "priorityName":"Priority Desc 789"}]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            addPriorityToList(element.priorityName);
+        }, this);
+
+    //     }
+    // );
+}
+
+function loadGRTypeMasterPanel(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+
+        $("#divGRTypeData").empty();
+        var resDataJson = '[{ "grTypeID":1, "grType":"GR Type 123"}, { "grTypeID":1, "grType":"GR Type 456"}, { "grTypeID":1, "grType":"GR Type 789"}]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            addGRTypeToList(element.grType);
+        }, this);
+
+    //     }
+    // );
+}
+
+function loadTLTypeMasterPanel(){
+    // callWebService(
+    //     'GET',
+    //     'http://localhost:5000/user/authenticate',
+    //     //reqJson,
+    //     function (resJson){
+
+        $("#divTruckLoadTypeData").empty();
+        var resDataJson = '[{ "tlTypeId":1, "tlType":"Truck Load Type 123"}, { "tlTypeId":1, "tlType":"Truck Load Type 456"}, { "tlTypeId":1, "tlType":"Truck Load Type 789"}]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            addTLTypeToList(element.tlType);
+        }, this);
+
+    //     }
+    // );
+}
+
+function addCityToList(cityname) {
+    if(cityname == null){
+        cityname = $("#dialogCity #txtCityName").val();
+    }
     cityList = $("#city-List");
     divEl = `
         <div class="mdl-grid data-list-item">
             <div class="mdl-cell mdl-cell--11-col">
-                <span style="font-size:16px" role="link">`+txtCity+`</span>
+                <span style="font-size:16px" role="link">`+cityname+`</span>
             </div>
             <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
                 <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -235,20 +392,27 @@ function addCityToList() {
         </div>`;
     cityList.append(divEl);
     cityList.scrollTop(1E10);
-    //$("#dialogCity")[0].close();
-    closeDialog("#dialogCity");
+    if($("#dialogCity").is(":visible")){
+        closeDialog("#dialogCity");
+    }
 }
 
-function addConsignToList() {
-    txtConName = $("#dialogConsign #txtConName").val();
-    txtConAddr = $("#dialogConsign #txtConAddr").val();
-    txtConPin = $("#dialogConsign #txtConPin").val();
+function addConsignToList(conName, conAddr, conPin) {
+    if(conName == null){
+        conName = $("#dialogConsign #txtConName").val();
+    }
+    if(conAddr == null){
+        conAddr = $("#dialogConsign #txtConAddr").val();
+    }
+    if(conPin == null){
+        conPin = $("#dialogConsign #txtConPin").val();
+    }
     consignList = $("#consign-List");
     divEl = `
         <div class="mdl-grid data-list-item">
             <div class="mdl-cell mdl-cell--11-col">
-                <div><span style="font-size:18px">`+txtConName+`</span></div>
-                <div><span style="font-size:12px">`+txtConAddr+` - `+txtConPin+`</span></div>
+                <div><span style="font-size:18px">`+conName+`</span></div>
+                <div><span style="font-size:12px">`+conAddr+` - `+conPin+`</span></div>
             </div>
             <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
                 <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -262,17 +426,20 @@ function addConsignToList() {
         </div>`;
     consignList.append(divEl);
     consignList.scrollTop(1E10);
-    //$("#dialogConsign")[0].close();
-    closeDialog("#dialogConsign");
+    if($("#dialogConsign").is(":visible")){
+        closeDialog("#dialogConsign");
+    }
 }
 
-function addDriverToList() {
-    txtDriverName = $("#dialogDriver #txtDriverName").val();
+function addDriverToList(driverName) {
+    if(driverName == null){
+        driverName = $("#dialogDriver #txtDriverName").val();
+    }
     driverList = $("#driver-List");
     divEl = `
         <div class="mdl-grid data-list-item">
             <div class="mdl-cell mdl-cell--11-col">
-                <span>`+txtDriverName+`</span>
+                <span>`+driverName+`</span>
             </div>
             <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
                 <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -286,19 +453,24 @@ function addDriverToList() {
         </div>`;
     driverList.append(divEl);
     driverList.scrollTop(1E10);
-    //$("#dialogDriver")[0].close();
-    closeDialog("#dialogDriver");
+    if($("#dialogDriver").is(":visible")){
+        closeDialog("#dialogDriver");
+    }
 }
 
-function addVehicleToList() {
-    txtVehicleName = $("#dialogVehicle #txtVehicleName").val();
-    txtVehicleNo = $("#dialogVehicle #txtVehicleNo").val();
+function addVehicleToList(vehicleName, vehicleNo) {
+    if(vehicleName == null){
+        vehicleName = $("#dialogVehicle #txtVehicleName").val();
+    }
+    if(vehicleNo == null){
+        vehicleNo = $("#dialogVehicle #txtVehicleNo").val();
+    }
     vehicleList = $("#vehicle-List");
     divEl = `
         <div class="mdl-grid data-list-item">
             <div class="mdl-cell mdl-cell--11-col">
-                <div><span style="font-size:18px">`+txtVehicleName+`</span></div>
-                <div><span style="font-size:12px">`+txtVehicleNo+`</span></div>
+                <div><span style="font-size:18px">`+vehicleName+`</span></div>
+                <div><span style="font-size:12px">`+vehicleNo+`</span></div>
             </div>
             <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
                 <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -312,21 +484,26 @@ function addVehicleToList() {
         </div>`;
     vehicleList.append(divEl);
     vehicleList.scrollTop(1E10);
-    //$("#dialogVehicle")[0].close();
-    closeDialog("#dialogVehicle");
+    if($("#dialogVehicle").is(":visible")){
+        closeDialog("#dialogVehicle");
+    }
 }
 
-function addPaymentTypeToList() {
-    txtPaymentTypeName = $("#dialogPaymentType #txtPaymentTypeName").val();
-    txtPaymentTypeSeq = $("#dialogPaymentType #txtPaymentTypeSeq").val();
+function addPaymentTypeToList(paymentTypeName, paymentTypeSeq) {
+    if(paymentTypeName == null){
+        paymentTypeName = $("#dialogPaymentType #txtPaymentTypeName").val();
+    }
+    if(paymentTypeSeq == null){
+        paymentTypeSeq = $("#dialogPaymentType #txtPaymentTypeSeq").val();
+    }
     paymentTypeList = $("#divPaymentTypeData");
     divEl = `
         <div class="mdl-grid data-list-item">
             <div class="mdl-cell mdl-cell--8-col">
-                <span>`+txtPaymentTypeName+`</span>
+                <span>`+paymentTypeName+`</span>
             </div>
             <div class="mdl-cell mdl-cell--1-col">
-                <span>`+txtPaymentTypeSeq+`</span>
+                <span>`+paymentTypeSeq+`</span>
             </div>                                
             <div class="mdl-cell mdl-cell--1-col">
                 <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="payid1">
@@ -346,17 +523,20 @@ function addPaymentTypeToList() {
         </div>`
     paymentTypeList.append(divEl);
     paymentTypeList.scrollTop(1E10);
-    //$("#dialogPaymentType")[0].close();
-    closeDialog("#dialogPaymentType");
+    if($("#dialogPaymentType").is(":visible")){
+        closeDialog("#dialogPaymentType");
+    }
 }
 
-function addPriorityToList() {
-    txtPriority = $("#dialogPriority #txtPriority").val();
+function addPriorityToList(priority) {
+    if(priority == null){
+        priority = $("#dialogPriority #txtPriority").val();
+    }
     PriorityList = $("#divPriorityData");
     divEl = `
          <div class="mdl-grid data-list-item">
             <div class="mdl-cell mdl-cell--10-col">
-                <div><span>`+txtPriority+`</span></div>
+                <div><span>`+priority+`</span></div>
             </div>            
             <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
                 <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -370,17 +550,20 @@ function addPriorityToList() {
         </div>`;
     PriorityList.append(divEl);
     PriorityList.scrollTop(1E10);
-    //$("#dialogPriority")[0].close();
-    closeDialog("#dialogPriority");
+    if($("#dialogPriority").is(":visible")){
+        closeDialog("#dialogPriority");
+    }
 }
 
-function addGRTypeToList() {
-    txtGRType = $("#dialogGRType #txtGRType").val();
+function addGRTypeToList(grType) {
+    if(grType == null){
+        grType = $("#dialogGRType #txtGRType").val();
+    }
     GRTypeList = $("#divGRTypeData");
     divEl = `
         <div class="mdl-grid data-list-item">
             <div class="mdl-cell mdl-cell--10-col">
-                <div><span>`+txtGRType+`</span></div>
+                <div><span>`+grType+`</span></div>
             </div>
             <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
                 <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -394,17 +577,20 @@ function addGRTypeToList() {
         </div>`;
     GRTypeList.append(divEl);
     GRTypeList.scrollTop(1E10);
-    //$("#dialogGRType")[0].close();
-    closeDialog("#dialogGRType");
+    if($("#dialogGRType").is(":visible")){
+        closeDialog("#dialogGRType");
+    }
 }
 
-function addTLTypeToList() {
-    txtTLType = $("#dialogTruckLoadType #txtTLType").val();
+function addTLTypeToList(tlType) {
+    if(tlType == null){
+        tlType = $("#dialogTruckLoadType #txtTLType").val();
+    }
     TLTypeList = $("#divTruckLoadTypeData");
     divEl = `
         <div class="mdl-grid data-list-item">
             <div class="mdl-cell mdl-cell--10-col">
-                <div><span>`+txtTLType+`</span></div>
+                <div><span>`+tlType+`</span></div>
             </div>
             <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
                 <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -418,10 +604,10 @@ function addTLTypeToList() {
         </div>`;
     TLTypeList.append(divEl);
     TLTypeList.scrollTop(1E10);
-    //$("#dialogTruckLoadType")[0].close();
-    closeDialog("#dialogTruckLoadType");
+    if($("#dialogTruckLoadType").is(":visible")){
+        closeDialog("#dialogTruckLoadType");
+    }
 }
-//Master Data Page Ends
 
 function closeDialog(elId) {
     $(elId)[0].close();
@@ -618,16 +804,16 @@ function getConsigneeData() {
 }
 
 function loadDropDowns(){
-    loadCity();
-    loadDestination();
-    loadDriverName();
-    loadVehicleNo();
-    loadGRType();
-    loadFTL();
-    loadPriority();
+    loadCityDD();
+    loadDestinationDD();
+    loadDriverNameDD();
+    loadVehicleNoDD();
+    loadGRTypeDD();
+    loadFTLDD();
+    loadPriorityDD();
 }
 
-function loadCity(){
+function loadCityDD(){
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -644,7 +830,7 @@ function loadCity(){
     // );
 }
 
-function loadDestination(){
+function loadDestinationDD(){
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -661,7 +847,7 @@ function loadDestination(){
     // );
 }
 
-function loadDriverName(){
+function loadDriverNameDD(){
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -669,16 +855,16 @@ function loadDriverName(){
     //     function (resJson){
             $("#selDriverName").children().remove();
             $("#selDriverName").append('<option selected disabled hidden value=""></option>');
-            var resDataJson = '[{ "cityId":1, "cityName":"Payal Patel" },{ "cityId":2, "cityName":"Aditya Toshniwal" },{ "cityId":3, "cityName":"Parshwa Shah" },{ "cityId":4, "cityName":"Rachit Bhatnagar" },{ "cityId":5, "cityName":"Bhumika Sanghvi" }]';
+            var resDataJson = '[{ "driverId":1, "driverName":"Payal Patel" },{ "driverId":2, "driverName":"Aditya Toshniwal" },{ "driverId":3, "driverName":"Parshwa Shah" },{ "driverId":4, "driverName":"Rachit Bhatnagar" },{ "driverId":5, "driverName":"Bhumika Sanghvi" }]';
             var resData = JSON.parse(resDataJson);
             resData.forEach(function(element) {
-                $("#selDriverName").append('<option value=' + element.cityId + '>' + element.cityName + '</option>');
+                $("#selDriverName").append('<option value=' + element.driverId + '>' + element.driverName + '</option>');
             }, this);
     //     }
     // );
 }
 
-function loadVehicleNo(){
+function loadVehicleNoDD(){
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -695,7 +881,7 @@ function loadVehicleNo(){
     // );
 }
 
-function loadGRType(){
+function loadGRTypeDD(){
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -712,7 +898,7 @@ function loadGRType(){
     // );
 }
 
-function loadFTL(){
+function loadFTLDD(){
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -729,7 +915,7 @@ function loadFTL(){
     // );
 }
 
-function loadPriority(){
+function loadPriorityDD(){
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -753,7 +939,7 @@ function loadGRData(){
     //     //reqJson,
     //     function (resJson){
             
-            var resDataJson = '[{"GRNO":1,"BranchCode":"Mumbai","STPaidBy":"Consignee","GRDate":"01/01/2017","FromCity":"1","Destination":"2","DriverName":"3","VehicleNo":"4","ConsignerName":"Payal Patel","ConsignerAddr":"Address Line 1, Address Line 2, Address Line 3","ConsignerPinCode":"400007","ConsigneeName":"Aditya Patel","ConsigneeAddr":"Address Line 1, Address Line 2, Address Line 3","ConsigneePinCode":"400007","GRType":"3","Freight":"Freight XYZ","CoverCharge":"5000","DoorDelivery":"4000","StatisticalCharge":"1000","RiskCharge":"500","ServiceTax":"800","GreenTax":"500","Total":"50000","TotalPackages":"100","ActWt":"5000","ChgWt":"5000","Rate":"4000","FTL":"2","PartyInvoice":"PartyInvoice XYZ","PartyInvoiceDate":"01012016","Remarks":"Remarks XYZ","Priority":"5","lstPMD":[{"Method":"Method XYZ","Description":"Description XYZ","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT XYZ"},{"Method":"Method PQR","Description":"Description PQR","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT PQR"},{"Method":"Method ABC","Description":"Description ABC","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT ABC"}]}]';
+            var resDataJson = '[{"GRNO":1,"BranchCode":"Mumbai","STPaidBy":"Consignee","GRDate":"01/01/2017","FromCity":"1","Destination":"2","DriverName":"3","VehicleNo":"4","ConsignerName":"Payal Patel","ConsignerAddr":"Address Line 1, Address Line 2, Address Line 3","ConsignerPinCode":"400007","ConsigneeName":"Aditya Patel","ConsigneeAddr":"Address Line 1, Address Line 2, Address Line 3","ConsigneePinCode":"400007","GRType":"3","Freight":"Freight XYZ","CoverCharge":"5000","DoorDelivery":"4000","StatisticalCharge":"1000","RiskCharge":"500","ServiceTax":"800","GreenTax":"500","Total":"50000","TotalPackages":"100","ActWt":"5000","ChgWt":"5000","Rate":"4000","FTL":"2","PartyInvoice":"PartyInvoice XYZ","PartyInvoiceDate":"01012016","Remarks":"Remarks XYZ","Priority":"5","lstPMD":[{"Method":"Method XYZ","Description":"Description XYZ","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT XYZ"},{"Method":"Method PQR","Description":"Description PQR","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT PQR"},{"Method":"Method ABC","Description":"Description ABC","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT ABC"},{"Method":"Method 123","Description":"Description 123","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT 123"},{"Method":"Method 456","Description":"Description 456","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT 456"},{"Method":"Method 789","Description":"Description 789","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT 789"}]}]';
             var resData = JSON.parse(resDataJson);
             resData.forEach(function(element) {
                 $("#txtGrNo").val(element.GRNO);
@@ -769,7 +955,7 @@ function loadGRData(){
                 $("#divAddressConsigner").append('<br/>' + element.ConsignerPinCode);
                 $("#txtConsigneeName").val(element.ConsigneeName);
                 $("#divAddressConsignee").text(element.ConsigneeAddr);
-                $("#divAddressConsignee").append('<br/>' + element.ConsigneePinCode);                
+                $("#divAddressConsignee").append('<br/>' + element.ConsigneePinCode);
                 $("#selGRType").val('' + element.GRType + '');
                 $("#txtFreight").val(element.Freight);
                 $("#txtSomething").val(element.Freight);
