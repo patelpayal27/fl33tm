@@ -686,7 +686,7 @@ function loadDashboard(){
     $( ".mdl-layout__drawer" ).bind( "click", function() {
         $( ".mdl-layout" )[0].MaterialLayout.toggleDrawer();
     });            
-}        
+}
 
 function loadLogin() {
 
@@ -695,36 +695,49 @@ function loadLogin() {
     });
 }
 
-function loadSettingsDialog() { 
+function checkSettingsFile(){
+    var fs = require('fs');
+    if(!checkFileExists('./settings.json')){
+        loaddialog('#dialogSettings');
+    }
+}
+
+function loadSettingsDialog() {
     getSettings();
     loaddialog('#dialogSettings');
 }
 
 function getSettings() {
     var fs = require('fs');
-    fs.readFile('./settings', 'utf-8', function (err,data) {
+    fs.readFile('./settings.json', 'utf-8', function (err, JsonData) {
         if (err) {
             return alert(err);
         }
-        $("#txtServerName").val(data);
+        
+        var resData = JSON.parse("[" + JsonData + "]");
+        resData.forEach(function(element) {
+            $("#txtServerName").val(element.serverSettings.serverName);
+        }, this);
 
-        // Floating Label not working when value is autofilled in textboxes. Hence below code. checkDirty updates MDL state explicitly if necessary.  "is-dirty" is the class that triggers the floating label.//
-        var nodeList = $(".mdl-textfield");
-        Array.prototype.forEach.call(nodeList, function (elem) {
-            elem.MaterialTextfield.checkDirty();
-        });
+        checkDirty_textfield();
     });
 }
 
 function saveSettings(){
+    var settingsObj = new Object();
+    var serverSettingsObj = new Object();
+    settingsObj.serverName = $("#txtServerName").val();
+    settingsObj.serverDesc = $("#txtServerName").val();
+    serverSettingsObj.serverSettings = settingsObj;
+
+    var jsonContent = JSON.stringify(serverSettingsObj, null, 4);
     var fs = require('fs');
-    var content = $("#txtServerName").val();
     try { 
-        fs.writeFileSync('settings', content, 'utf-8');
-        alert("Settings saved successfully");
+        fs.writeFileSync('settings.json', jsonContent, 'utf-8');
+        showSnackbar("Settings saved successfully");
         closeDialog("#dialogSettings");
     }
-    catch(e) { alert('Failed to save settings !'); }
+    catch(e) { showSnackbar('Failed to save settings !'); }
 }
 
 function loadConsignerDialog() { 
@@ -981,14 +994,35 @@ function loadGRData(){
                     addPackageDtlsToList(PMDData.Method, PMDData.Description, PMDData.ActWt, PMDData.Rate, PMDData.ChgWt, PMDData.CFT);
                 }, this);
 
-                // Floating Label not working when value is autofilled in textboxes. Hence below code. checkDirty updates MDL state explicitly if necessary.  "is-dirty" is the class that triggers the floating label.//
-                var nodeList = $(".mdl-textfield");
-                Array.prototype.forEach.call(nodeList, function (elem) {
-                    elem.MaterialTextfield.checkDirty();
-                });
+                checkDirty_textfield();
             }, this);
     //     }
     // );
+}
+
+function checkDirty_textfield(){
+    // Floating Label not working when value is autofilled in textboxes. Hence below code. checkDirty updates MDL state explicitly if necessary.  "is-dirty" is the class that triggers the floating label.//
+    var nodeList = $(".mdl-textfield");
+    Array.prototype.forEach.call(nodeList, function (elem) {
+        elem.MaterialTextfield.checkDirty();
+    });
+}
+
+function checkFileExists(filepath){
+    var fs = require('fs');
+    if(fs.existsSync(filepath)){ 
+        return true; 
+    }
+    else { return false; }
+}
+
+function showSnackbar(data){
+    var snackbarContainer = document.querySelector('#fleetSnackbar');
+    // var snackbarContainer1 = $('#fleetSnackbar');
+    // alert(snackbarContainer);
+    // alert(snackbarContainer1);
+    var snackbarContent = {message: data};
+    snackbarContainer.MaterialSnackbar.showSnackbar(snackbarContent);
 }
 
 /*********** WEB service API  ****************/
