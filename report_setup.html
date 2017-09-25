@@ -1,12 +1,7 @@
 <div class="mdl-grid mdl-grid--no-spacing full-width-textbox">
     <div class="mdl-cell mdl-cell--4-col pad-5lr" >
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <select tabindex="5" class="mdl-textfield__input" id="selRepName">
-                <option></option>
-                <option value="1">Report 1</option>
-                <option value="2">Report 2</option>
-                <option value="3">Report 3</option>
-            </select>
+            <select tabindex="5" class="mdl-textfield__input" id="selRepName"></select>
             <label class="mdl-textfield__label" for="selRepName">Report Name</label>
         </div>
         <div class="mdl-grid mdl-grid--no-spacing full-width-textbox">
@@ -41,49 +36,50 @@
     </div>
 </div>
 <script>
-    $("#repFrame").on("did-start-loading",  
-        function() {
-            console.log('1');
-            $('#generateReport').prop('disabled', true);
-            $("#generateReport").html("Generating...");
-        }
-    );
-    $("#repFrame").on("did-stop-loading",  
-        function() {
-            console.log('2');      
-            $('#generateReport').prop('disabled', false);                  
-            $("#generateReport").html("Generate");
-        }
-    );
+    bindReportEvents();
+    // $("#repFrame").on("did-start-loading",  
+    //     function() {
+    //         console.log('1');
+    //         $('#generateReport').prop('disabled', true);
+    //         $("#generateReport").html("Generating...");
+    //     }
+    // );
+    // $("#repFrame").on("did-stop-loading",  
+    //     function() {
+    //         console.log('2');      
+    //         $('#generateReport').prop('disabled', false);                  
+    //         $("#generateReport").html("Generate");
+    //     }
+    // );
     
-    $("#generateReport").click(function () {
-        setTimeout( function() {
-            $("#repFrame").attr( 'src', 'reports/testreport.html');
-        }, 200 );       
-        //$("#repFrame").src='reports/testreport.html'; 
-    });
+    // $("#generateReport").click(function () {
+    //     setTimeout( function() {
+    //         $("#repFrame").attr( 'src', 'reports/testreport.html');
+    //     }, 200 );       
+    //     //$("#repFrame").src='reports/testreport.html'; 
+    // });
 
-    $("#savePDF").click(function () {
-        dialog.showSaveDialog(
-            {
-                defaultPath:'~/printfile.pdf',
-                filters: [
-                    { name: 'PDF', extensions: ['pdf'] }
-                ]
-            }, function (fileName) {
-                if (fileName === undefined) return;
-                $("#repFrame")[0].printToPDF(
-                    {printBackground: true}, 
-                    function (error, data) {
-                        if (error) throw error
-                        fs.writeFile(fileName, data, function (error) {
-                            if (error) { throw error }
-                            shell.openItem(fileName)
-                        })
-                });                    
+    // $("#savePDF").click(function () {
+    //     dialog.showSaveDialog(
+    //         {
+    //             defaultPath:'~/printfile.pdf',
+    //             filters: [
+    //                 { name: 'PDF', extensions: ['pdf'] }
+    //             ]
+    //         }, function (fileName) {
+    //             if (fileName === undefined) return;
+    //             $("#repFrame")[0].printToPDF(
+    //                 {printBackground: true}, 
+    //                 function (error, data) {
+    //                     if (error) throw error
+    //                     fs.writeFile(fileName, data, function (error) {
+    //                         if (error) { throw error }
+    //                         shell.openItem(fileName)
+    //                     })
+    //             });                    
 
-            }
-        );
+    //         }
+    //     );
 
-    });
+    // });
 </script>  
