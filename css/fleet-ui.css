@@ -260,3 +260,8 @@ src: local('Material Icons'),
     /* Support for IE. */
     font-feature-settings: 'liga';
 }
+
+.mdl-snackbar {
+    min-width: 100% !important;
+    background-color: #0277BD !important;
+}
