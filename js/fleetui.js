@@ -709,10 +709,10 @@ function loadConsignMasterPanel(){
     //     function (resJson){
 
         $("#consign-List").empty();
-        var resDataJson = '[{ "consign_id":1, "consign_name":"Payal Patel", "consign_addr":"Address Payal", "consign_pincode":"400007 Pincode Payal" },{ "consign_id":2, "consign_name":"Aditya Toshniwal", "consign_addr":"Address Aditya", "consign_pincode":"400007 Pincode Aditya" },{ "consign_id":3, "consign_name":"Parshwa Shah", "consign_addr":"Address Parshwa", "consign_pincode":"400007 Pincode Parshwa" },{ "consign_id":4, "consign_name":"Rachit Bhatnagar", "consign_addr":"Address Rachit", "consign_pincode":"400007 Pincode Rachit" },{ "consign_id":5, "consign_name":"Bhumika Sanghvi", "consign_addr":"Address Bhumika", "consign_pincode":"400007 Pincode Bhumika" }]';
+        var resDataJson = '[{"consign_id":1, "consign_name":"Payal Patel", "consign_addr":"Payal, Grant Road, Mumbai, 400007", "consign_cntct":"9725586862"},{ "consign_id":2, "consign_name":"Aditya Toshniwal", "consign_addr":"Aditya, Grant Road, Mumbai, 400007", "consign_cntct":"9725586862"},{ "consign_id":3, "consign_name":"Parshwa Shah", "consign_addr":"Parshwa, Grant Road, Mumbai,, 400007", "consign_cntct":"9725586862"},{ "consign_id":4, "consign_name":"Rachit Bhatnagar", "consign_addr":"Rachit, Grant Road, Mumbai,, 400007", "consign_cntct":"9725586862"},{ "consign_id":5, "consign_name":"Bhumika Sanghvi", "consign_addr":"Bhumika, Grant Road, Mumbai,, 400007", "consign_cntct":"9725586862"}]';
         var resData = JSON.parse(resDataJson);
         resData.forEach(function(element) {
-            addConsignToList(element.consign_name, element.consign_addr, element.consign_pincode);
+            addConsignToList(element.consign_name, element.consign_addr, element.consign_cntct);
         }, this);
 
     //     }
@@ -828,22 +828,25 @@ function loadTLTypeMasterPanel(){
     // );
 }
 
-function addConsignToList(conName, conAddr, conPin) {
+function addConsignToList(conName, conAddr, conContact) {
     if(conName == null){
         conName = $("#dialogConsign #txtConName").val();
     }
     if(conAddr == null){
         conAddr = $("#dialogConsign #txtConAddr").val();
     }
-    if(conPin == null){
-        conPin = $("#dialogConsign #txtConPin").val();
+    if(conContact == null){
+        conContact = $("#dialogConsign #txtConContact").val();
     }
     var consignList = $("#consign-List");
     var divEl = `
         <div class="mdl-grid data-list-item">
             <div class="mdl-cell mdl-cell--11-col">
                 <div><span style="font-size:18px">`+conName+`</span></div>
-                <div><span style="font-size:12px">`+conAddr+` - `+conPin+`</span></div>
+                <div>
+                    <span style="font-size:12px">Address : `+conAddr+`</span>&nbsp;&nbsp;|&nbsp;
+                    <span style="font-size:12px">Contact : `+conContact+`</span>
+                </div>
             </div>
             <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
                 <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
