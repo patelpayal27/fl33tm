@@ -182,7 +182,8 @@
             </button>
         </div>
     </div>
-    <input id="cityId" type="text" hidden="true"/>
+    <input id="txtCityId" type="text" hidden="true"/>
+    <input id="citySubmitType" type="text" hidden="true"/>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
         <input class="mdl-textfield__input" type="text" id="txtCityName"  pattern="[A-Za-z ]*"/>
         <label class="mdl-textfield__label" for="txtCityName">City</label>
@@ -190,7 +191,7 @@
     </div>
     <div class="dialog-footer">
         <button id="btnAddCity" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
-        onclick="addCityToList()">Save</button>
+        onclick="submitCity();">Save</button>
     </div>
 </dialog>
 <dialog id="dialogConsign" class="mdl-dialog" style="width:30%">
@@ -207,7 +208,7 @@
     </div>
     <input id="conId" type="text" hidden="true"/>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
-        <input class="mdl-textfield__input" type="text" id="txtConName"  pattern="[A-Za-z ]*"/>
+        <input class="mdl-textfield__input" type="text" id="txtConName" pattern="[A-Za-z ]*"/>
         <label class="mdl-textfield__label" for="txtConName">Name</label>
         <span id="conNameErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
     </div>
@@ -217,14 +218,13 @@
         <span id="conAddrErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets,Numbers and Dots allowed.</span>
     </div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
-        <input class="mdl-textfield__input" type="text" id="txtConPin" maxlength="6"  pattern="[0-9]*"/>
-        <label class="mdl-textfield__label" for="txtConPin">Pin Code</label>
-        <span id="conPinErr" class="mdl-textfield__error">Invalid Entry. Only Numbers Allowed with length 6.</span>
+        <input class="mdl-textfield__input" type="text" id="txtConContact" maxlength="6" pattern="[0-9]*"/>
+        <label class="mdl-textfield__label" for="txtConContact">Contact No</label>
+        <span id="conContactErr" class="mdl-textfield__error">Invalid Entry. Only Numbers Allowed with length 6.</span>
     </div>
     <div class="dialog-footer">
         <button id="btnAddCon" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
         onclick="addConsignToList()">Save</button>
-        <!-- <button id="btnEditCon" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Edit</button> -->
     </div>
 </dialog>
 <dialog id="dialogDriver" class="mdl-dialog" style="width:30%">
