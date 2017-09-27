@@ -182,7 +182,8 @@
             </button>
         </div>
     </div>
-    <input id="cityId" type="text" hidden="true"/>
+    <input id="txtCityId" type="text" hidden="true"/>
+    <input id="citySubmitType" type="text" hidden="true"/>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
         <input class="mdl-textfield__input" type="text" id="txtCityName"  pattern="[A-Za-z ]*"/>
         <label class="mdl-textfield__label" for="txtCityName">City</label>
@@ -190,7 +191,7 @@
     </div>
     <div class="dialog-footer">
         <button id="btnAddCity" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
-        onclick="addCityToList()">Save</button>
+        onclick="submitCity();">Save</button>
     </div>
 </dialog>
 <dialog id="dialogConsign" class="mdl-dialog" style="width:30%">
