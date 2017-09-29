@@ -40,9 +40,25 @@ function bindLoginEvents() {
 }
 
 function loadLogin() {
+    //For TESTing
+    preloaderGif(true, "body");
+    setTimeout(function(){preloaderGif(false, "body");},10000);
+    //Till here For TESTing
+
     $('#container').load('./login.html', function(){
         componentHandler.upgradeAllRegistered();
     });
+}
+
+function preloaderGif(showflag, controlName){
+    if(showflag){
+        $(controlName).removeClass('loader-hide').addClass('loader-show');
+        $('body').append('<div id="overDiv" style="position:absolute;top:0;left:0;width: 100%;height:100%;z-index:2;opacity:0.4;)"></div>');
+    }
+    else{
+        $(controlName).removeClass('loader-show').addClass('loader-hide');
+        $("#overDiv").remove();
+    }
 }
 
 function showPreloader(i_eleId){
@@ -124,7 +140,7 @@ function loadDashboard(){
         componentHandler.upgradeAllRegistered();
         $('#user-page-content').load('dashboard_content.html', function(){
             //loadFlatpickr();
-            componentHandler.upgradeAllRegistered(); 
+            componentHandler.upgradeAllRegistered();
             loadGraph();
         });
     });
@@ -212,6 +228,11 @@ function exitApp() {
 
 //******* Region G.R. Book *******
 function showSearchResult() {
+    //For TESTing
+    preloaderGif(true, "#SearchResultPanel");
+    setTimeout(function(){preloaderGif(false, "#SearchResultPanel");},10000);
+    //Till here For TESTing
+
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
