@@ -12,6 +12,15 @@ src: local('Material Icons'),
 }
 -->
 
+.loader-show {
+    background-image: url("../images/preloader.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.loader-hide {
+    background-image: none;
+}
+
 .preloader-overlay {
     width: 100%;
     height: 100%;
