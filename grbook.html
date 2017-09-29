@@ -33,12 +33,6 @@
     <div id="middlePanel" class="mdl-grid mdl-grid--no-spacing">
         <div id="consignPackPanel" class="mdl-cell mdl-cell--9-col pad-5lr mdl-shadow--2dp full-widht-textbox">
 			<div style="padding: 10px 5px 10px 5px;" class="section-header">Consigner-Consignee Detail:
-                <button id="btnTEST" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-                    onclick="loadConsignerDialog()">Consigner Dialog
-                </button>
-                <button id="btnTEST1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
-                    onclick="loadConsigneeDialog()">Consignee Dialog
-                </button>
             </div>
             <div class="mdl-grid mdl-grid--no-spacing pad-5lr">
                 <div class="mdl-cell mdl-cell--3-col">
@@ -70,30 +64,38 @@
                 </div>         
             </div>
             <div id="consignPanel" class="mdl-grid mdl-grid--no-spacing">
-                <div id="consignerPanel" class="mdl-cell mdl-cell--6-col pad-5lr">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input tabindex="9"  class="mdl-textfield__input" type="text" id="txtConsignerName"/>
-                        <label class="mdl-textfield__label" for="txtConsignerName">Consigner Name</label>
+                <div id="consignerPanel" class="mdl-cell mdl-cell--6-col"><!-- pad-5lr -->
+                    <div class="mdl-grid mdl-grid--no-spacing pad-5lr">
+                        <div class="mdl-cell mdl-cell--10-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input tabindex="9" class="mdl-textfield__input" type="text" id="txtConsignerName"/>
+                            <label class="mdl-textfield__label" for="txtConsignerName">Consigner Name</label>
+                        </div>
+                        <div class="mdl-cell mdl-cell--2-col pad-20-0-0-5">
+                            <button class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect mdl-button--icon"
+                            onclick="loaddialog('#dialogConsigner');">
+                                <i class="material-icons" style="font-size:28px;">person</i>
+                            </button>
+                        </div>
+                        <div id="divAddressConsigner" class="mdl-cell mdl-cell--12-col pad-5lr">
+                            Dummy Div For Consigner Address
+                        </div>
                     </div>
-                    <div id="divAddressConsigner">
-                        Here Comes the address and all other 
-                        asdas
-                        asdsa
-                        dasdasdasdasdas
-                        sadasdsadasd
-                    </div>
-                </div> 
-                <div id="consigneePanel" class="mdl-cell mdl-cell--6-col pad-5lr">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input tabindex="10"  class="mdl-textfield__input" type="text" id="txtConsigneeName"/>
-                        <label class="mdl-textfield__label" for="txtConsigneeName">Consignee Name</label>
-                    </div>
-                    <div id="divAddressConsignee">
-                        Here Comes the address and all other 
-                        asdas
-                        asdsa
-                        dasdasdasdasdas
-                        sadasdsadasd
+                </div>
+                <div id="consigneePanel" class="mdl-cell mdl-cell--6-col"><!-- pad-5lr -->
+                    <div class="mdl-grid mdl-grid--no-spacing pad-5lr">
+                        <div class="mdl-cell mdl-cell--10-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input tabindex="10"  class="mdl-textfield__input" type="text" id="txtConsigneeName"/>
+                            <label class="mdl-textfield__label" for="txtConsigneeName">Consignee Name</label>
+                        </div>
+                        <div class="mdl-cell mdl-cell--2-col pad-20-0-0-5">
+                            <button class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect mdl-button--icon"
+                            onclick="loaddialog('#dialogConsignee');">
+                                <i class="material-icons" style="font-size:28px;">person</i>
+                            </button>
+                        </div>
+                        <div id="divAddressConsignee" class="mdl-cell mdl-cell--12-col pad-5lr">
+                            Dummy Div For Consignee Address
+                        </div>
                     </div>
                 </div>                         
             </div>
