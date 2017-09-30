@@ -21,8 +21,7 @@
                 </div>
             </div>
             <div class="mdl-cell mdl-cell--2-col" style="text-align:right">
-                <button id="btnAddCityMain" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
-                        onclick="cityBtnHandler('add')">
+                <button id="btnAddCity" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
                 <i class="material-icons">add</i>
                 </button>
             </div> 
@@ -171,13 +170,13 @@
     </div>
 </div>
 
-<dialog id="dialogCity" class="mdl-dialog" style="width:30%" >
+<dialog id="dialogCity" class="mdl-dialog" style="width:30%">
     <div class="mdl-grid mdl-grid--no-spacing dialog-header">
         <div id="divDialogHeader" class="mdl-cell mdl-cell--10-col dialog-header-title"> 
             Manage City
         </div>
         <div class="mdl-cell mdl-cell--2-col" style="text-align:right"> 
-            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" 
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
                 onclick="closeDialog('#dialogCity')" tabindex="-1">
                 <i class="material-icons">close</i>
             </button>
@@ -191,9 +190,8 @@
         <span id="cityNameErr" class="mdl-textfield__error">Invalid Entry. Only Alphabets and Spaces allowed.</span>
     </div>
     <div class="dialog-footer">
-        <button  id="dialogCityBtn" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">
-            Save
-        </button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" 
+        onclick="submitData('city');">Save</button>
     </div>
 </dialog>
 <dialog id="dialogConsign" class="mdl-dialog" style="width:30%">
