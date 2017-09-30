@@ -8,9 +8,6 @@ const remote = require('electron').remote
 const {dialog,shell} = require('electron').remote;
 
 
-/* Global Vars */
-g_cityDivItem = null;
-
 function sleep(milliseconds) {
     for (var i = 0; i < 1000; i++) {
         null;
@@ -580,10 +577,10 @@ function getConsignData() {
 
 //******* Region Master Data *******
 function bindMasterEvents() {
-    $('#cities-panel #btnAddCity').on("click",function(){
-        $("#citySubmitType").val("add"); $("#txtCityId").val(null); $("#txtCityName").val(null);
-        checkDirty_textfield(); loaddialog('#dialogCity');
-    });
+    // $('#cities-panel #btnAddCityMain').on("click",function(){
+    //     $("#citySubmitType").val("add"); $("#txtCityId").val(null); $("#txtCityName").val(null);
+    //     loaddialog('#dialogCity');
+    // });
     $('#consign-panel #btnAddConsignMain').on("click",function(){ loaddialog('#dialogConsign'); });
     $('#drivers-panel #btnAddDriverMain').on("click",function(){ loaddialog('#dialogDriver'); });
     $('#vehicle-panel #btnAddVehicleMain').on("click",function(){ loaddialog('#dialogVehicle'); });
@@ -604,14 +601,86 @@ function loadMasterPanels(){
         $("#city-List").empty();
         var resDataJson = '[{ "city_id":1, "city_name":"Mumbai" },{ "city_id":2, "city_name":"Pune" },{ "city_id":3, "city_name":"Ahmedabad" },{ "city_id":4, "city_name":"Bangalore" },{ "city_id":5, "city_name":"Delhi" }]';
         var resData = JSON.parse(resDataJson);
-        resData.forEach(function(element) {
-            addCityToList(element.city_id, element.city_name);
-        }, this);
+        resData.forEach(
+            function(element) {
+                addCityToList(element.city_id, element.city_name, false);
+            }, 
+            this
+        );
 
     //     }
     // );
-    
-    //// loadConsignMasterPanel ////
+}
+
+function addCityToList(cityid, cityname, scroll = true) {
+    var cityList = $("#city-List");
+    var divEl = `
+        <div class="mdl-grid data-list-item" data-city_id="`+cityid+`">
+            <div class="mdl-cell mdl-cell--11-col">
+                <span id="cityName" style="font-size:16px" role="link">`+cityname+`</span>
+            </div>
+            <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
+                <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" 
+                onclick="cityBtnHandler('edit', $(this).parents('.data-list-item'))">
+                    <i class="material-icons">mode_edit</i>
+                </button>
+                <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+                onclick="cityBtnHandler('delete', $(this).parents('.data-list-item'))">
+                    <i class="material-icons">delete_forever</i>
+                </button>
+            </div>
+        </div>`;
+    cityList.append(divEl);
+    if(scroll){
+        cityList.scrollTop(1E10);
+    }
+}
+
+function cityBtnHandler(clicktype, divItem = null){
+    if(clicktype == "edit"){
+        var cityid = $(divItem).data('city_id');
+        var cityName = $(divItem).find("#cityName").text();
+        $("#dialogCity #txtCityId").val(cityid);
+        $("#dialogCity #txtCityName").val(cityName);
+        $("#dialogCity #dialogCityBtn").off('click')
+        $("#dialogCity #dialogCityBtn").on(
+            'click', function() {
+                /* call web service to edit, service will return sucess.
+                 it will return error if city already exists*/
+                $(divItem).find("#cityName").text($("#dialogCity #txtCityName").val())
+                closeDialog("#dialogCity");
+            }
+        )
+        loaddialog('#dialogCity');
+        checkDirty_textfield();
+    }
+    else if(clicktype == "delete"){
+        divItem = $(btnObj).parents(".data-list-item");
+        var cityid = $(divItem).data('city_id');
+        //Call service to Delete data. //If success then update the grid.
+        //onclick="$(this).closest('.data-list-item').remove();">
+        divItem.remove();
+    }    
+    else if(clicktype == "add"){
+        $("#dialogCity #txtCityId").val(0);
+        $("#dialogCity #txtCityName").val('');
+        $("#dialogCity #dialogCityBtn").off('click')
+        $("#dialogCity #dialogCityBtn").on(
+            'click', function() {
+                alert(1)
+                var cityName = $("#dialogCity #txtCityName").val();
+                /* call web service to add, service will return new city id.
+                it will return error if city already exists*/
+                var cityId = 0;
+                addCityToList(cityId, cityName);
+                closeDialog("#dialogCity");              
+            }
+        )
+        loaddialog('#dialogCity');
+    }
+}
+
+function loadConsignMasterPanel(){
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -627,6 +696,7 @@ function loadMasterPanels(){
 
     //     }
     // );
+}
 
     //// loadDriverMasterPanel ////
     // callWebService(
@@ -730,47 +800,6 @@ function loadMasterPanels(){
 
     //     }
     // );
-}
-
-function addCityToList(cityid, cityname) {
-    if(cityname == null){
-        cityname = $("#dialogCity #txtCityName").val();
-    }
-    var cityList = $("#city-List");
-    var divEl = `
-        <div class="mdl-grid data-list-item" data-city_id="`+cityid+`">
-            <div class="mdl-cell mdl-cell--11-col">
-                <span id="cityName" style="font-size:16px" role="link">`+cityname+`</span>
-            </div>
-            <div class="mdl-cell mdl-cell--1-col" style="text-align:right">
-                <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
-                onClick="(function(divItem){
-                    g_cityDivItem = divItem;
-                    var cityid = $(g_cityDivItem).data('city_id');
-                    var cityName = $(g_cityDivItem).find('#cityName').text();
-                    $('#dialogCity #citySubmitType').val('edit');
-                    $('#dialogCity #txtCityId').val(cityid);
-                    $('#dialogCity #txtCityName').val(cityName);
-                    loaddialog('#dialogCity');
-                    checkDirty_textfield();
-                })($(this).closest('.data-list-item'));">
-                    <i class="material-icons">mode_edit</i>
-                </button>
-                <button class="data-list-buttons mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
-                onClick="(function(divItem){
-                    var cityid = $(g_cityDivItem).data('city_id');//pass city id to service to delete
-                    //Call service to Delete data. //If success then update the grid.
-                    divItem.remove();
-                })($(this).closest('.data-list-item'));">
-                    <i class="material-icons">delete_forever</i>
-                </button>
-            </div>
-        </div>`;
-    cityList.append(divEl);
-    cityList.scrollTop(1E10);
-    if($("#dialogCity").is(":visible")){
-        closeDialog("#dialogCity");
-    }
 }
 
 function addConsignToList(conName, conAddr, conContact) {
@@ -987,66 +1016,6 @@ function addTLTypeToList(tlType) {
         closeDialog("#dialogTruckLoadType");
     }
 }
-
-function submitData(masterDataType){
-    switch(masterDataType) {
-        case "city":
-            {
-                var submittype = $("#citySubmitType").val();
-                switch(submittype) {
-                    case "add":
-                        {
-                            //Call service to Add/Update data. //If success then update the grid.
-                            var cityid = 0;//cityid return from service
-                            var cityname = $("#dialogCity #txtCityName").val();
-                            addCityToList(cityid, cityname);
-                        }
-                        break;
-                    case "edit":
-                        {
-                            g_cityDivItem.find("#cityName").text($("#dialogCity #txtCityName").val());
-                            if($("#dialogCity").is(":visible")){
-                                closeDialog("#dialogCity");
-                            }
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-            break;
-        case "consign":
-            {
-            }
-            break;
-        case "driver":
-            {
-            }
-            break;
-        case "vehicle":
-            {
-            }
-            break;
-        case "paymenttype":
-            {
-            }
-            break;
-        case "priority":
-            {
-            }
-            break;
-        case "grtype":
-            {
-            }
-            break;
-        case "tltype":
-            {
-            }
-            break;
-        default:
-            break;
-    }
-}
 //******* End Region Master Data *******
 
 //******* Region Reports *******
@@ -1191,7 +1160,9 @@ function loaddialog(dialogId){
 }
 
 function closeDialog(elId) {
-    $(elId)[0].close();
+    if($(elId).prop("open")) {
+        $(elId)[0].close();
+    }
 }
 
 function scrollToBottom(){
