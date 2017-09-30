@@ -16,15 +16,46 @@ function sleep(milliseconds) {
 
 //******* Region Login, Dashboard ********
 function bindLoginEvents() {
-    $('#btnSettings').click(function(){ loadSettingsDialog(); });
-    $('#btnSaveSettings').click(function(){ saveSettings(); });
+    $('#btnSettings').click(function(){ loaddialog('#dialogSettings'); });
+    $('#btnSaveSettings').click(function(){
+        var settingsObj = new Object();
+        var serverSettingsObj = new Object();
+        settingsObj.serverName = $("#txtServerName").val();
+        settingsObj.serverDesc = $("#txtServerName").val();
+        serverSettingsObj.serverSettings = settingsObj;
+        var jsonContent = JSON.stringify(serverSettingsObj, null, 4);
+        try { 
+            fs.writeFileSync('settings.json', jsonContent, 'utf-8');
+            showSnackbar("Settings saved successfully");
+            closeDialog("#dialogSettings");
+        }
+        catch(e) { showSnackbar('Failed to save settings !'); }
+    });
     $('#aNewUser').click(function(){ loaddialog('#dialogNewUser'); });
+    $('#btnExit').click(function(){ exitApp() });
+    checkNLoadSettings();
 }
 
 function loadLogin() {
+    //For TESTing
+    preloaderGif(true, "body");
+    setTimeout(function(){preloaderGif(false, "body");},10000);
+    //Till here For TESTing
+
     $('#container').load('./login.html', function(){
         componentHandler.upgradeAllRegistered();
     });
+}
+
+function preloaderGif(showflag, controlName){
+    if(showflag){
+        $(controlName).removeClass('loader-hide').addClass('loader-show');
+        $('body').append('<div id="overDiv" style="position:absolute;top:0;left:0;width: 100%;height:100%;z-index:2;opacity:0.4;)"></div>');
+    }
+    else{
+        $(controlName).removeClass('loader-show').addClass('loader-hide');
+        $("#overDiv").remove();
+    }
 }
 
 function showPreloader(i_eleId){
@@ -39,46 +70,24 @@ function hidePreloader(i_eleId){
     $(i_eleId).css("display", "none");
 }
 
-function checkSettingsFile(){
+function checkNLoadSettings(){
     if(!checkFileExists('./settings.json')){
         loaddialog('#dialogSettings');
     }
-}
-
-function loadSettingsDialog() {
-    getSettings();
-    loaddialog('#dialogSettings');
-}
-
-function getSettings() {
-    fs.readFile('./settings.json', 'utf-8', function (err, JsonData) {
-        if (err) {
-            return alert(err);
-        }
-        
-        var resData = JSON.parse("[" + JsonData + "]");
-        resData.forEach(function(element) {
-            $("#txtServerName").val(element.serverSettings.serverName);
-        }, this);
-
-        checkDirty_textfield();
-    });
-}
-
-function saveSettings(){
-    var settingsObj = new Object();
-    var serverSettingsObj = new Object();
-    settingsObj.serverName = $("#txtServerName").val();
-    settingsObj.serverDesc = $("#txtServerName").val();
-    serverSettingsObj.serverSettings = settingsObj;
-
-    var jsonContent = JSON.stringify(serverSettingsObj, null, 4);
-    try { 
-        fs.writeFileSync('settings.json', jsonContent, 'utf-8');
-        showSnackbar("Settings saved successfully");
-        closeDialog("#dialogSettings");
+    else{
+        fs.readFile('./settings.json', 'utf-8', function (err, JsonData) {
+            if (err) {
+                return alert(err);
+            }
+            
+            var resData = JSON.parse("[" + JsonData + "]");
+            resData.forEach(function(element) {
+                $("#txtServerName").val(element.serverSettings.serverName);
+            }, this);
+    
+            checkDirty_textfield();
+        });
     }
-    catch(e) { showSnackbar('Failed to save settings !'); }
 }
 
 function loginUser() {
@@ -128,14 +137,14 @@ function loadDashboard(){
         componentHandler.upgradeAllRegistered();
         $('#user-page-content').load('dashboard_content.html', function(){
             //loadFlatpickr();
-            componentHandler.upgradeAllRegistered(); 
+            componentHandler.upgradeAllRegistered();
             loadGraph();
         });
     });
 
     $( ".mdl-layout__drawer" ).bind( "click", function() {
         $( ".mdl-layout" )[0].MaterialLayout.toggleDrawer();
-    });            
+    });
 }
 
 function loadUserPageContent(el){
@@ -216,6 +225,11 @@ function exitApp() {
 
 //******* Region G.R. Book *******
 function showSearchResult() {
+    //For TESTing
+    preloaderGif(true, "#SearchResultPanel");
+    setTimeout(function(){preloaderGif(false, "#SearchResultPanel");},10000);
+    //Till here For TESTing
+
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -285,134 +299,119 @@ function showGrDialog(i_grNo) {
 }
 
 function loadDropDowns(){
-    loadCityDD();
-    loadDestinationDD();
-    loadDriverNameDD();
-    loadVehicleNoDD();
-    loadGRTypeDD();
-    loadTLTypeDD();
-    loadPriorityDD();
-    getConsignerData();
-    getConsigneeData();
-}
-
-function loadCityDD(){
+    //// loadCityDD() ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
     //     //reqJson,
     //     function (resJson){
-            $("#selFromCity").children().remove();
-            $("#selFromCity").append('<option selected disabled hidden value=""></option>');
-            var resDataJson = '[{ "city_id":1, "city_name":"Mumbai" },{ "city_id":2, "city_name":"Pune" },{ "city_id":3, "city_name":"Ahmedabad" },{ "city_id":4, "city_name":"Bangalore" },{ "city_id":5, "city_name":"Delhi" }]';
-            var resData = JSON.parse(resDataJson);
-            resData.forEach(function(element) {
-                $("#selFromCity").append('<option value=' + element.city_id + '>' + element.city_name + '</option>');
-            }, this);
+        $("#selFromCity").children().remove();
+        $("#selFromCity").append('<option selected disabled hidden value=""></option>');
+        var resDataJson = '[{ "city_id":1, "city_name":"Mumbai" },{ "city_id":2, "city_name":"Pune" },{ "city_id":3, "city_name":"Ahmedabad" },{ "city_id":4, "city_name":"Bangalore" },{ "city_id":5, "city_name":"Delhi" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            $("#selFromCity").append('<option value=' + element.city_id + '>' + element.city_name + '</option>');
+        }, this);
     //     }
     // );
-}
 
-function loadDestinationDD(){
+    //// loadDestinationDD() ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
     //     //reqJson,
     //     function (resJson){
-            $("#selDestination").children().remove();
-            $("#selDestination").append('<option selected disabled hidden value=""></option>');
-            var resDataJson = '[{ "city_id":1, "city_name":"Mumbai" },{ "city_id":2, "city_name":"Pune" },{ "city_id":3, "city_name":"Ahmedabad" },{ "city_id":4, "city_name":"Bangalore" },{ "city_id":5, "city_name":"Delhi" }]';
-            var resData = JSON.parse(resDataJson);
-            resData.forEach(function(element) {
-                $("#selDestination").append('<option value=' + element.city_id + '>' + element.city_name + '</option>');
-            }, this);
+        $("#selDestination").children().remove();
+        $("#selDestination").append('<option selected disabled hidden value=""></option>');
+        var resDataJson = '[{ "city_id":1, "city_name":"Mumbai" },{ "city_id":2, "city_name":"Pune" },{ "city_id":3, "city_name":"Ahmedabad" },{ "city_id":4, "city_name":"Bangalore" },{ "city_id":5, "city_name":"Delhi" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            $("#selDestination").append('<option value=' + element.city_id + '>' + element.city_name + '</option>');
+        }, this);
     //     }
     // );
-}
 
-function loadDriverNameDD(){
+    //// loadDriverNameDD() ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
     //     //reqJson,
     //     function (resJson){
-            $("#selDriverName").children().remove();
-            $("#selDriverName").append('<option selected disabled hidden value=""></option>');
-            var resDataJson = '[{ "driver_id":1, "driver_name":"Payal Patel" },{ "driver_id":2, "driver_name":"Aditya Toshniwal" },{ "driver_id":3, "driver_name":"Parshwa Shah" },{ "driver_id":4, "driver_name":"Rachit Bhatnagar" },{ "driver_id":5, "driver_name":"Bhumika Sanghvi" }]';
-            var resData = JSON.parse(resDataJson);
-            resData.forEach(function(element) {
-                $("#selDriverName").append('<option value=' + element.driver_id + '>' + element.driver_name + '</option>');
-            }, this);
+        $("#selDriverName").children().remove();
+        $("#selDriverName").append('<option selected disabled hidden value=""></option>');
+        var resDataJson = '[{ "driver_id":1, "driver_name":"Payal Patel" },{ "driver_id":2, "driver_name":"Aditya Toshniwal" },{ "driver_id":3, "driver_name":"Parshwa Shah" },{ "driver_id":4, "driver_name":"Rachit Bhatnagar" },{ "driver_id":5, "driver_name":"Bhumika Sanghvi" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            $("#selDriverName").append('<option value=' + element.driver_id + '>' + element.driver_name + '</option>');
+        }, this);
     //     }
     // );
-}
 
-function loadVehicleNoDD(){
+    //// loadVehicleNoDD() ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
     //     //reqJson,
     //     function (resJson){
-            $("#selVehicleNo").children().remove();
-            $("#selVehicleNo").append('<option selected disabled hidden value=""></option>');
-            var resDataJson = '[{ "vehicle_id":1, "vehicle_no":"XXX XXXX 2519" },{ "vehicle_id":2, "vehicle_no":"XXX XXXX 2519" },{ "vehicle_id":3, "vehicle_no":"XXX XXXX 2519" },{ "vehicle_id":4, "vehicle_no":"XXX XXXX 2519" },{ "vehicle_id":5, "vehicle_no":"XXX XXXX 2519" }]';
-            var resData = JSON.parse(resDataJson);
-            resData.forEach(function(element) {
-                $("#selVehicleNo").append('<option value=' + element.vehicle_id + '>' + element.vehicle_no + '</option>');
-            }, this);
+        $("#selVehicleNo").children().remove();
+        $("#selVehicleNo").append('<option selected disabled hidden value=""></option>');
+        var resDataJson = '[{ "vehicle_id":1, "vehicle_no":"XXX XXXX 2519" },{ "vehicle_id":2, "vehicle_no":"XXX XXXX 2519" },{ "vehicle_id":3, "vehicle_no":"XXX XXXX 2519" },{ "vehicle_id":4, "vehicle_no":"XXX XXXX 2519" },{ "vehicle_id":5, "vehicle_no":"XXX XXXX 2519" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            $("#selVehicleNo").append('<option value=' + element.vehicle_id + '>' + element.vehicle_no + '</option>');
+        }, this);
     //     }
     // );
-}
 
-function loadGRTypeDD(){
+    //// loadGRTypeDD() ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
     //     //reqJson,
     //     function (resJson){
-            $("#selGRType").children().remove();
-            $("#selGRType").append('<option selected disabled hidden value=""></option>');
-            var resDataJson = '[{ "gr_type_id":1, "gr_type_desc":"GRType 1" },{ "gr_type_id":2, "gr_type_desc":"GRType 2" },{ "gr_type_id":3, "gr_type_desc":"GRType 3" },{ "gr_type_id":4, "gr_type_desc":"gr_type 4" },{ "gr_type_id":5, "gr_type_desc":"GRType 5" }]';
-            var resData = JSON.parse(resDataJson);
-            resData.forEach(function(element) {
-                $("#selGRType").append('<option value=' + element.gr_type_id + '>' + element.gr_type_desc + '</option>');
-            }, this);
+        $("#selGRType").children().remove();
+        $("#selGRType").append('<option selected disabled hidden value=""></option>');
+        var resDataJson = '[{ "gr_type_id":1, "gr_type_desc":"GRType 1" },{ "gr_type_id":2, "gr_type_desc":"GRType 2" },{ "gr_type_id":3, "gr_type_desc":"GRType 3" },{ "gr_type_id":4, "gr_type_desc":"gr_type 4" },{ "gr_type_id":5, "gr_type_desc":"GRType 5" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            $("#selGRType").append('<option value=' + element.gr_type_id + '>' + element.gr_type_desc + '</option>');
+        }, this);
     //     }
     // );
-}
 
-function loadTLTypeDD(){
+    //// loadTLTypeDD() ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
     //     //reqJson,
     //     function (resJson){
-            $("#selTL").children().remove();
-            $("#selTL").append('<option selected disabled hidden value=""></option>');
-            var resDataJson = '[{ "tl_id":1, "tl_name":"TL 1" },{ "tl_id":2, "tl_name":"TL 2" },{ "tl_id":3, "tl_name":"TL 3" },{ "tl_id":4, "tl_name":"TL 4" },{ "tl_id":5, "tl_name":"TL 5" }]';
-            var resData = JSON.parse(resDataJson);
-            resData.forEach(function(element) {
-                $("#selTL").append('<option value=' + element.tl_id + '>' + element.tl_name + '</option>');
-            }, this);
+        $("#selTL").children().remove();
+        $("#selTL").append('<option selected disabled hidden value=""></option>');
+        var resDataJson = '[{ "tl_id":1, "tl_name":"TL 1" },{ "tl_id":2, "tl_name":"TL 2" },{ "tl_id":3, "tl_name":"TL 3" },{ "tl_id":4, "tl_name":"TL 4" },{ "tl_id":5, "tl_name":"TL 5" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            $("#selTL").append('<option value=' + element.tl_id + '>' + element.tl_name + '</option>');
+        }, this);
     //     }
     // );
-}
 
-function loadPriorityDD(){
+    //// loadPriorityDD() ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
     //     //reqJson,
     //     function (resJson){
-            $("#selPriority").children().remove();
-            $("#selPriority").append('<option selected disabled hidden value=""></option>');
-            var resDataJson = '[{ "pri_id":1, "pri_name":"Lowest" },{ "pri_id":2, "pri_name":"Low" },{ "pri_id":3, "pri_name":"Normal" },{ "pri_id":4, "pri_name":"High" },{ "pri_id":5, "pri_name":"Highest" }]';
-            var resData = JSON.parse(resDataJson);
-            resData.forEach(function(element) {
-                $("#selPriority").append('<option value=' + element.pri_id + '>' + element.pri_name + '</option>');
-            }, this);
+        $("#selPriority").children().remove();
+        $("#selPriority").append('<option selected disabled hidden value=""></option>');
+        var resDataJson = '[{ "pri_id":1, "pri_name":"Lowest" },{ "pri_id":2, "pri_name":"Low" },{ "pri_id":3, "pri_name":"Normal" },{ "pri_id":4, "pri_name":"High" },{ "pri_id":5, "pri_name":"Highest" }]';
+        var resData = JSON.parse(resDataJson);
+        resData.forEach(function(element) {
+            $("#selPriority").append('<option value=' + element.pri_id + '>' + element.pri_name + '</option>');
+        }, this);
     //     }
     // );
+
+    getConsignData();
 }
 
 function loadGRData(){
@@ -421,8 +420,7 @@ function loadGRData(){
     //     'http://localhost:5000/user/authenticate',
     //     //reqJson,
     //     function (resJson){
-            
-            //var resDataJson = '[{"GRNO":1,"BranchCode":"Mumbai","STPaidBy":"Consignee","GRDate":"01/01/2017","FromCity":"1","Destination":"2","DriverName":"3","VehicleNo":"4","ConsignerName":"Payal Patel","ConsignerAddr":"Address Line 1, Address Line 2, Address Line 3","ConsignerPinCode":"400007","ConsigneeName":"Aditya Patel","ConsigneeAddr":"Address Line 1, Address Line 2, Address Line 3","ConsigneePinCode":"400007","GRType":"3","Freight":"Freight XYZ","CoverCharge":"5000","DoorDelivery":"4000","StatisticalCharge":"1000","RiskCharge":"500","ServiceTax":"800","GreenTax":"500","Total":"50000","TotalPackages":"100","ActWt":"5000","ChgWt":"5000","Rate":"4000","FTL":"2","PartyInvoice":"PartyInvoice XYZ","PartyInvoiceDate":"01012016","Remarks":"Remarks XYZ","Priority":"5","lstPMD":[{"Method":"Method XYZ","Description":"Description XYZ","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT XYZ"},{"Method":"Method PQR","Description":"Description PQR","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT PQR"},{"Method":"Method ABC","Description":"Description ABC","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT ABC"},{"Method":"Method 123","Description":"Description 123","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT 123"},{"Method":"Method 456","Description":"Description 456","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT 456"},{"Method":"Method 789","Description":"Description 789","ActWt":"3000","Rate":"5000","ChgWt":"4545","CFT":"CFT 789"}]}]';
+
             var resDataJson = '[{"gr_no":1,"branch_code":"Mumbai","st_paid_by":"Consignee","gr_date":"01/01/2017","from_city_id":"1","dest_city_id":"2","driver_id":"3","vehicle_id":"4","consigner_id":1,"consignee_id":2,"gr_type_id":"3","freight":165,"cover_charge":5000,"door_delivery":4000,"statistical_charge":1000,"risk_charge":500,"service_tax":800,"green_tax":500,"total":50000,"total_packages":100,"tl_id":"2","party_inv":"PartyInvoice XYZ","party_inv_date":"01012016","remarks":"Remarks XYZ","pri_id":"5","pack_material_details":[{"pkg_method":"Method XYZ","pkg_desc":"Description XYZ","pkg_wt":"3000","pkg_rate":"5000","pkg_mark":"4545","pkg_cft":"CFT XYZ"},{"pkg_method":"Method ABC","pkg_desc":"Description ABC","pkg_wt":"3000","pkg_rate":"5000","pkg_mark":"4545","pkg_cft":"CFT ABC"},{"pkg_method":"Method PQR","pkg_desc":"Description PQR","pkg_wt":"3000","pkg_rate":"5000","pkg_mark":"4545","pkg_cft":"CFT PQR"},{"pkg_method":"Method 123","pkg_desc":"Description 123","pkg_wt":"3000","pkg_rate":"5000","pkg_mark":"4545","pkg_cft":"CFT 123"},{"pkg_method":"Method 456","pkg_desc":"Description 456","pkg_wt":"3000","pkg_rate":"5000","pkg_mark":"4545","pkg_cft":"CFT 456"}]}]';
             var resData = JSON.parse(resDataJson);
             resData.forEach(function(element) {
@@ -436,21 +434,17 @@ function loadGRData(){
                 $("#selVehicleNo").val('' + element.vehicle_id + '');
                 $("#txtConsignerName").val(element.consigner_id);
                 
-                var consignerData = JSON.parse(consignerDataJson);
-                consignerData.forEach(function(element1) {
-                    if(element1.consigner_id == element.consigner_id){
-                        $("#txtConsignerName").val(element1.consigner_name);
-                        $("#divAddressConsigner").text(element1.consigner_address);
-                        $("#divAddressConsigner").append('<br/>' + element1.consigner_pincode);
+                var consignData = JSON.parse(consignDataJson);
+                consignData.forEach(function(element1) {
+                    if(element.consigner_id == element1.consign_id){
+                        $("#txtConsignerName").val(element1.consign_name);
+                        $("#divAddressConsigner").text(element1.consign_addr);
+                        $("#divAddressConsigner").append('<br/>' + element1.consign_cntct);
                     }
-                }, this);
-
-                var consigneeData = JSON.parse(consigneeDataJson);
-                consigneeData.forEach(function(element1) {
-                    if(element1.consignee_id == element.consignee_id){
-                        $("#txtConsigneeName").val(element1.consignee_name);
-                        $("#divAddressConsignee").text(element1.consignee_address);
-                        $("#divAddressConsignee").append('<br/>' + element1.consignee_pincode);
+                    if(element.consignee_id == element1.consign_id){
+                        $("#txtConsigneeName").val(element1.consign_name);
+                        $("#divAddressConsignee").text(element1.consign_addr);
+                        $("#divAddressConsignee").append('<br/>' + element1.consign_cntct);
                     }
                 }, this);
 
@@ -468,14 +462,14 @@ function loadGRData(){
                 // $("#txtActualWt").val(element.ActWt);
                 // $("#txtChgWt").val(element.ChgWt);
                 // $("#txtRate").val(element.Rate);
-                $("#selFTL").val(element.tl_id);
+                $("#selTL").val(element.tl_id);
                 $("#txtPartyInv").val(element.party_inv);
                 $("#txtPartyInvDate").val(element.party_inv_date);
                 $("#txtRemarks").val(element.remarks);
                 $("#selPriority").val(element.pri_id);
 
                 element.pack_material_details.forEach(function(pmd_data) {
-                    addPackageDtlsToList(pmd_data.pkg_method, pmd_data.pkg_desc, pmd_data.pkg_wt, pmd_data.pkg_rate, pmd_data.pkg_mark, pmd_data.pkg_cft);
+                    addPackageToList(pmd_data.pkg_method, pmd_data.pkg_desc, pmd_data.pkg_wt, pmd_data.pkg_rate, pmd_data.pkg_mark, pmd_data.pkg_cft);
                 }, this);
 
                 checkDirty_textfield();
@@ -484,19 +478,27 @@ function loadGRData(){
     // );
 }
 
-function addPackageToList() {
-    var txtMethod = $("#packageAddPanel1 #txtMethod").val();
-    var txtDesc = $("#packageAddPanel1 #txtDesc").val();
-    var txtActualWt = $("#packageAddPanel2 #txtActualWt").val();
-    var txtRate = $("#packageAddPanel2 #txtRate").val();
-    var txtChgWt = $("#packageAddPanel2 #txtChgWt").val();
-    var txtCft = $("#packageAddPanel2 #txtCft").val();
-    addPackageDtlsToList(txtMethod, txtDesc, txtActualWt, txtRate, txtChgWt, txtCft);
-}
+function addPackageToList(method, desc, actualwt, rate, chgwt, cft) {
+    if(method == null){
+        method = $("#packageAddPanel1 #txtMethod").val();
+    }
+    if(desc == null){
+        desc = $("#packageAddPanel1 #txtDesc").val();
+    }
+    if(actualwt == null){
+        actualwt = $("#packageAddPanel2 #txtActualWt").val();
+    }
+    if(rate == null){
+        rate = $("#packageAddPanel2 #txtRate").val();
+    }
+    if(chgwt == null){
+        chgwt = $("#packageAddPanel2 #txtChgWt").val();
+    }
+    if(cft == null){
+        cft = $("#packageAddPanel2 #txtCft").val();
+    }
 
-function addPackageDtlsToList(method, desc, actualwt, rate, chgwt, cft) {
     var packList = $("#packageList");
-    
     var divEl = `
         <div class="mdl-grid data-list-item">
             <div class="mdl-cell mdl-cell--8-col">
@@ -524,12 +526,7 @@ function addPackageDtlsToList(method, desc, actualwt, rate, chgwt, cft) {
     packList.scrollTop(1E10);
 }
 
-function loadConsignerDialog() { 
-    //getConsignerData();
-    loaddialog('#dialogConsigner');
-}
-
-function getConsignerData() {
+function getConsignData() {
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -537,59 +534,40 @@ function getConsignerData() {
     //     function (resJson){
         var divConsignerData = $("#divConsignerData");
         divConsignerData.empty();
-
-        consignerDataJson = '[{ "consigner_id":1, "consigner_name":"Payal Patel", "consigner_address":"Address Payal", "consigner_pincode":"400007 Pincode Payal" },{ "consigner_id":2, "consigner_name":"Aditya Toshniwal", "consigner_address":"Address Aditya", "consigner_pincode":"400007 Pincode Aditya" },{ "consigner_id":3, "consigner_name":"Parshwa Shah", "consigner_address":"Address Parshwa", "consigner_pincode":"400007 Pincode Parshwa" },{ "consigner_id":4, "consigner_name":"Rachit Bhatnagar", "consigner_address":"Address Rachit", "consigner_pincode":"400007 Pincode Rachit" },{ "consigner_id":5, "consigner_name":"Bhumika Sanghvi", "consigner_address":"Address Bhumika", "consigner_pincode":"400007 Pincode Bhumika" }]';
-        var resData = JSON.parse(consignerDataJson);
-        resData.forEach(function(element) {
-            var divEl = `
-            <div class="mdl-grid data-list-item grsearch-item" data-consigner_id="`+element.consigner_id+`" data-consigner_name="`+element.consigner_name+`" data-consigner_address="`+element.consigner_address+`" data-consigner_pincode="`+element.consigner_pincode+`">
-                <div class="mdl-cell mdl-cell--11-col">
-                    <div><span style="font-size:18px">`+element.consigner_name+`</span></div>
-                    <div><span style="font-size:12px">`+element.consigner_address+` - `+element.consigner_pincode+`</span></div>
-                </div>
-            </div>`;
-            divConsignerData.append(divEl);
-        }, this);
-        $("#divConsignerData .grsearch-item").on("dblclick",function(){
-            $("#txtConsignerName").val($(this).data("consigner_name"));
-            $("#divAddressConsigner").text($(this).data("consigner_address"));
-            $("#divAddressConsigner").append('<br/>' + $(this).data("consigner_pincode"));
-            closeDialog("#dialogConsigner");
-        });
-    //     }
-    // );
-}
-
-function loadConsigneeDialog(){ 
-    //getConsigneeData();
-    loaddialog('#dialogConsignee');
-}
-
-function getConsigneeData() {
-    // callWebService(
-    //     'GET',
-    //     'http://localhost:5000/user/authenticate',
-    //     //reqJson,
-    //     function (resJson){
         var divConsigneeData = $("#divConsigneeData");
         divConsigneeData.empty();
 
-        consigneeDataJson = '[{ "consignee_id":1, "consignee_name":"Payal Patel", "consignee_address":"Address Payal", "consignee_pincode":"400007 Pincode Payal" },{ "consignee_id":2, "consignee_name":"Aditya Toshniwal", "consignee_address":"Address Aditya", "consignee_pincode":"400007 Pincode Aditya" },{ "consignee_id":3, "consignee_name":"Parshwa Shah", "consignee_address":"Address Parshwa", "consignee_pincode":"400007 Pincode Parshwa" },{ "consignee_id":4, "consignee_name":"Rachit Bhatnagar", "consignee_address":"Address Rachit", "consignee_pincode":"400007 Pincode Rachit" },{ "consignee_id":5, "consignee_name":"Bhumika Sanghvi", "consignee_address":"Address Bhumika", "consignee_pincode":"400007 Pincode Bhumika" }]';
-        var resData = JSON.parse(consigneeDataJson);
+        consignDataJson = '[{"consign_id":1, "consign_name":"Payal Patel", "consign_addr":"Payal, Grant Road, Mumbai, 400007", "consign_cntct":"9725586862"},{ "consign_id":2, "consign_name":"Aditya Toshniwal", "consign_addr":"Aditya, Grant Road, Mumbai, 400007", "consign_cntct":"9123123123"},{ "consign_id":3, "consign_name":"Parshwa Shah", "consign_addr":"Parshwa, Grant Road, Mumbai, 400007", "consign_cntct":"9456456456"},{ "consign_id":4, "consign_name":"Rachit Bhatnagar", "consign_addr":"Rachit, Grant Road, Mumbai, 400007", "consign_cntct":"9789789789"},{ "consign_id":5, "consign_name":"Bhumika Sanghvi", "consign_addr":"Bhumika, Grant Road, Mumbai, 400007", "consign_cntct":"9010101010"}]';
+        var resData = JSON.parse(consignDataJson);
         resData.forEach(function(element) {
             var divEl = `
-            <div class="mdl-grid data-list-item grsearch-item" data-consignee_id="`+element.consignee_id+`" data-consignee_name="`+element.consignee_name+`" data-consignee_address="`+element.consignee_address+`" data-consignee_pincode="`+element.consignee_pincode+`">
+            <div class="mdl-grid data-list-item grsearch-item" data-consigner_id="`+element.consign_id+`" data-consigner_name="`+element.consign_name+`" data-consigner_addr="`+element.consign_addr+`" data-consigner_cntct="`+element.consign_cntct+`">
                 <div class="mdl-cell mdl-cell--11-col">
-                    <div><span style="font-size:18px">`+element.consignee_name+`</span></div>
-                    <div><span style="font-size:12px">`+element.consignee_address+` - `+element.consignee_pincode+`</span></div>
+                    <div><span style="font-size:18px">`+element.consign_name+`</span></div>
+                    <div><span style="font-size:12px">`+element.consign_addr+` - `+element.consign_cntct+`</span></div>
+                </div>
+            </div>`;
+            divConsignerData.append(divEl);
+
+            divEl = `
+            <div class="mdl-grid data-list-item grsearch-item" data-consignee_id="`+element.consign_id+`" data-consignee_name="`+element.consign_name+`" data-consignee_addr="`+element.consign_addr+`" data-consignee_cntct="`+element.consign_cntct+`">
+                <div class="mdl-cell mdl-cell--11-col">
+                    <div><span style="font-size:18px">`+element.consign_name+`</span></div>
+                    <div><span style="font-size:12px">`+element.consign_addr+` - `+element.consign_cntct+`</span></div>
                 </div>
             </div>`;
             divConsigneeData.append(divEl);
         }, this);
+        $("#divConsignerData .grsearch-item").on("dblclick",function(){
+            $("#txtConsignerName").val($(this).data("consigner_name"));
+            $("#divAddressConsigner").text($(this).data("consigner_addr"));
+            $("#divAddressConsigner").append('<br/>' + $(this).data("consigner_cntct"));
+            closeDialog("#dialogConsigner");
+        });
         $("#divConsigneeData .grsearch-item").on("dblclick",function(){
             $("#txtConsigneeName").val($(this).data("consignee_name"));
-            $("#divAddressConsignee").text($(this).data("consignee_address"));
-            $("#divAddressConsignee").append('<br/>' + $(this).data("consignee_pincode"));
+            $("#divAddressConsignee").text($(this).data("consignee_addr"));
+            $("#divAddressConsignee").append('<br/>' + $(this).data("consignee_cntct"));
             closeDialog("#dialogConsignee");
         });
     //     }
@@ -613,17 +591,7 @@ function bindMasterEvents() {
 }
 
 function loadMasterPanels(){
-    loadCityMasterPanel();
-    loadConsignMasterPanel();
-    loadDriverMasterPanel();
-    loadVehicleMasterPanel();
-    loadPaymentTypeMasterPanel();
-    loadPriorityMasterPanel();
-    loadGRTypeMasterPanel();
-    loadTLTypeMasterPanel();
-}
-
-function loadCityMasterPanel(){
+    //// loadCityMasterPanel ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -730,7 +698,7 @@ function loadConsignMasterPanel(){
     // );
 }
 
-function loadDriverMasterPanel(){
+    //// loadDriverMasterPanel ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -746,9 +714,8 @@ function loadDriverMasterPanel(){
 
     //     }
     // );
-}
 
-function loadVehicleMasterPanel(){
+    //// loadVehicleMasterPanel ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -764,10 +731,9 @@ function loadVehicleMasterPanel(){
 
     //     }
     // );
-}
 
-//Remove - It will be static
-function loadPaymentTypeMasterPanel(){
+    //Remove - It will be static
+    //// loadPaymentTypeMasterPanel ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -783,9 +749,8 @@ function loadPaymentTypeMasterPanel(){
 
     //     }
     // );
-}
 
-function loadPriorityMasterPanel(){
+    //// loadPriorityMasterPanel ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -801,9 +766,8 @@ function loadPriorityMasterPanel(){
 
     //     }
     // );
-}
 
-function loadGRTypeMasterPanel(){
+    //// loadGRTypeMasterPanel ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
@@ -819,9 +783,8 @@ function loadGRTypeMasterPanel(){
 
     //     }
     // );
-}
 
-function loadTLTypeMasterPanel(){
+    //// loadTLTypeMasterPanel ////
     // callWebService(
     //     'GET',
     //     'http://localhost:5000/user/authenticate',
